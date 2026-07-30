@@ -25,3 +25,27 @@ function startSlideshow() {
     }, 3000);
 }
 startSlideshow();
+
+function showLogin() {
+    document.getElementById('signup').classList.remove('active');
+    document.getElementById('login').classList.add('active');
+}
+
+function showSignup() {
+    document.getElementById('login').classList.remove('active');
+    document.getElementById('signup').classList.add('active');
+}
+
+
+// Show/hide password text.
+function togglePassword(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '🙈';
+    } else {
+        input.type = 'password';
+        btn.textContent = '👁️';
+    }
+}
+
