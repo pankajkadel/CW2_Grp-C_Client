@@ -50,6 +50,29 @@
 
                 <button type="button" onclick="submitSignup()">Create account</button>
             </form>
+
+            <!-- Create another form for the login page. -->
+            <form id="login">
+                <h2>Log in</h2>
+                <p>Don't have an account?
+                    <a href="#" onclick="showSignup(); return false;">Create Account</a>
+                </p>
+
+                <input type="email" placeholder="Email Address">
+
+                <div class="password_field">
+                    <input type="password" placeholder="Password" id="login_password">
+                    <button type="button" class="eye_btn" onclick="togglePassword('login_password', this)">👁</button>
+                </div>
+
+                <div class="row_between">
+                    <label class="remember">
+                        <input type="checkbox">
+                        Remember me
+                    </label>
+                    <a href="#">Forgot password?</a>
+                </div>
+            </form>
     </div>
 
     <script src="script.js" defer></script>
