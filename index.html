@@ -17,6 +17,39 @@
                 <div class="logo">Shifty</div>
                 <a href="#" class="back-btn">Back to previous page. &rarr;</a>
             </div>
+            <div class="login_img_bottom">
+                <h2>Capturing Moments,<br>Creating Memories</h2>
+            </div>
+        </div>
+
+        <div class="login_form">
+
+            <form id="signup">
+                <h2>Create an account</h2>
+                <p>Already have an account?
+                    <a href="#" onclick="showLogin(); return false;">Log in</a>
+                </p>
+
+                <div class="name_row">
+                    <input type="text" placeholder="First Name">
+                    <input type="text" placeholder="Last Name">
+                </div>
+                <input type="text" placeholder="Company ID">
+                <input type="email" placeholder="Email Address">
+
+                <div class="password_field">
+                    <input type="password" placeholder="Password" id="signup_password">
+                    <button type="button" class="eye_btn" onclick="togglePassword('signup_password', this)">👁</button>
+                </div>
+
+                <label class="terms">
+                    <input type="checkbox" id="terms" required>
+                    I agree to the
+                    <a href="#term_section">Terms and Conditions</a>
+                </label>
+
+                <button type="button" onclick="submitSignup()">Create account</button>
+            </form>
     </div>
 
     <script src="script.js" defer></script>
