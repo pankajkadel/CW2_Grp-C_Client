@@ -1,3 +1,4 @@
+/* Every color used on the page */
 :root {
     --bg-outer: #302b40;
     --bg-card: #211c2c;
@@ -10,8 +11,43 @@
     --accent-soft: #9d92f2;
 }
 
+
+/* Universal selector */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+
+/* Create a short transition for the image */ 
+#slide_img{
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.fading{
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-outer);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    padding: 24px;
+}
+
+/* Login page */
+.login {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-card);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
 }
