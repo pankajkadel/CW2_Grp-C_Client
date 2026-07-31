@@ -1,0 +1,16 @@
+:root {
+    --bg-outer: #17141f;
+    --bg-card: #211c2c;
+    --bg-field: #322c40;
+    --bg-field-border: #4a4358;
+    --text-primary: #f5f3f8;
+    --text-muted: #a49fb3;
+    --accent: #7c6fe8;
+    --accent-hover: #6d5fdb;
+    --accent-soft: #9d92f2;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
