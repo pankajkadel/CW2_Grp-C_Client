@@ -10,23 +10,34 @@
 
         <header class="nav" id="nav">
             <div class="nav_inner">
-                <div class="logo">Shifty</div>
 
-                <nav class="nav_links">
+                <div class="logo">Shifty</div>
+                    <nav class="nav_links">
+                        <a href="#about">About</a>
+                        <a href="#services">Services</a>
+                        <a href="#stats">Company</a>
+                        <a href="#contact">Contact</a>
+                    </nav>
+                </div>
+
+                <div class="nav_actions">
+                        <a href="index.html?mode=signup" class="btn btn_ghost">Create a new company</a>
+                        <a href="index.html?mode=login" class="btn btn_primary">Login / Request</a>
+                </div>
+
+                    <button class="nav_burger" id="navBurger" aria-label="Menu">
+                        <span></span><span></span><span></span>
+                    </button>
+
+                <div class="nav_mobile" id="navMobile">
                     <a href="#about">About</a>
                     <a href="#services">Services</a>
                     <a href="#stats">Company</a>
                     <a href="#contact">Contact</a>
-                </nav>
-            </div>
-
-            <div class="nav_actions">
                     <a href="index.html?mode=signup" class="btn btn_ghost">Create a new company</a>
                     <a href="index.html?mode=login" class="btn btn_primary">Login / Request</a>
                 </div>
-
-                <button class="nav_burger" id="navBurger" aria-label="Menu">
-                    <span></span><span></span><span></span>
-                </button>
+        </div>
+        </header>
     </body>
 </html>
