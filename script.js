@@ -49,3 +49,26 @@ function togglePassword(inputId, btn) {
     }
 }
 
+
+// Handle the "Create account" click
+function submitSignup() {
+    const terms = document.getElementById('terms');
+    if (!terms.checked) {
+        alert('Please agree to the Terms and Conditions to continue.');
+        return;
+    }
+    alert('Your application is sent and once the manager approves you will be notified through your given email, and you can log into your account.');
+}
+
+// Handle login form submit (prevents page reload)
+document.addEventListener('DOMContentLoaded', () => {
+    // Show the signup form by default
+    document.getElementById('signup').classList.add('active');
+
+    const loginForm = document.getElementById('login');
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Put your real login logic / API call here
+        alert('Login submitted!');
+    });
+});
