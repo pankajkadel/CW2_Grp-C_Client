@@ -128,6 +128,15 @@ body {
 
 
 /* Term and condition part */
+.terms-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #a49fb3;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+}
 
 .terms-container h1 {
     text-align: center;
