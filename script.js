@@ -15,3 +15,21 @@ navMobile.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => navMobile.classList.remove('open'));
 });
 
+
+//  Animated stat counters (triggered when scrolled into view) 
+const statNums = document.querySelectorAll('.stat_num');
+
+function animateCount(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const duration = 1200;
+    const start = performance.now();
+
+    function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const value = Math.floor(progress * target);
+        el.textContent = value.toLocaleString();
+        if (progress < 1) requestAnimationFrame(tick);
+        else el.textContent = target.toLocaleString();
+    }
+    requestAnimationFrame(tick);
+}
