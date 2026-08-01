@@ -125,6 +125,7 @@ body {
 .nav_mobile .btn { margin-top: 12px; text-align: center; }
 
 
+ /* homepage for the website */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -240,3 +241,18 @@ body {
     color: var(--accent-soft);
     font-weight: 700;
 }
+
+
+/* STATS  */
+.stats { background: var(--bg-card); padding: 64px 24px; }
+.stats_grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    text-align: center;
+}
+.stat_num { display: block; font-size: 40px; font-weight: 700; color: var(--accent-soft); }
+.stat_label { display: block; margin-top: 6px; color: var(--text-muted); font-size: 14px; }
+
