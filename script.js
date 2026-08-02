@@ -1,4 +1,4 @@
-console.log("JS loaded");
+
 
 // Nav background on scroll
 const nav = document.getElementById("nav");
