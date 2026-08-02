@@ -76,3 +76,45 @@ body {
     opacity: 0;
     transform: translateX(-50px);
 }
+
+/* terms and conditions section  */
+
+
+.terms-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #a49fb3;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+
+.terms-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+}
+
+
+.terms-container ol {
+    padding-left: 25px;
+}
+
+
+.terms-container li {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+
+.terms-container strong {
+    font-size: 18px;
+}
+
+
+.terms-container p {
+    margin-top: 8px;
+    color: #555;
+}
+
