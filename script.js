@@ -33,3 +33,16 @@ function animateCount(el) {
     }
     requestAnimationFrame(tick);
 }
+
+
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCount(entry.target);
+            statsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.4 });
+
+statNums.forEach(el => statsObserver.observe(el));
+
