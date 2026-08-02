@@ -305,3 +305,20 @@ body {
 .footer_links a { color: var(--text-muted); text-decoration: none; }
 .footer_links a:hover { color: var(--text-primary); }
 
+/* create a responsive media for all devices */
+
+@media (max-width: 900px) {
+    .nav_links, .nav_actions { display: none; }
+    .nav_burger { display: flex; }
+    .hero_content h1 { font-size: 38px; }
+    .about_grid { grid-template-columns: 1fr; gap: 36px; }
+    .stats_grid { grid-template-columns: repeat(2, 1fr); }
+    .cards { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+    .cards { grid-template-columns: 1fr; }
+    .stats_grid { grid-template-columns: 1fr 1fr; }
+}
+
+
+
