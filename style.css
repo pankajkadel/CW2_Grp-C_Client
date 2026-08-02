@@ -256,3 +256,26 @@ body {
 .stat_num { display: block; font-size: 40px; font-weight: 700; color: var(--accent-soft); }
 .stat_label { display: block; margin-top: 6px; color: var(--text-muted); font-size: 14px; }
 
+/* Services section  */
+
+.services { padding: 110px 24px 90px; max-width: 1180px; margin: 0 auto; }
+.services h2 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 50px; }
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--bg-field-border);
+    border-radius: 18px;
+    padding: 28px 24px;
+}
+.card_icon { font-size: 26px; margin-bottom: 16px; }
+.card h3 { font-size: 17px; margin-bottom: 10px; }
+.card p { color: var(--text-muted); font-size: 14px; }
+
+
+
+
