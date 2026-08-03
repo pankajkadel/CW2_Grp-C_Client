@@ -47,6 +47,12 @@
                     <input type="password" placeholder="Password" id="signup_password" required>
                     <button type="button" class="eye_btn" onclick="togglePassword('signup_password', this)">👁</button>
                 </div>
+                <div class="password_rules">
+                    <p id="upper">✗ First letter must be uppercase</p>
+                    <p id="length">✗ At least 8 characters</p>
+                    <p id="number">✗ Contains a number</p>
+                    <p id="symbol">✗ Contains a symbol</p>
+                </div>
 
                 <label class="terms">
                     <input type="checkbox" id="terms" required>
