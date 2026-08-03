@@ -77,6 +77,22 @@ body {
     letter-spacing: 1px;
 }
 
+.signup_img_bottom {
+    position: absolute;
+    left: 36px;
+    right: 36px;
+    bottom: 36px;
+    z-index: 2;
+}
+
+.signup_img_bottom h2 {
+    color: #fff;
+    font-size: 32px;
+    line-height: 1.25;
+    font-weight: 600;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
 /* image slide and opacity */
 
 #slide_img{
