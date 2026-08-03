@@ -15,7 +15,7 @@
             <img id="slide_img" src="images/image1.jpg" alt="Slider">
             <div class="login_img_top">
                 <div class="logo">Shifty</div>
-                <a href="#" class="back-btn">Back to previous page. &rarr;</a>
+                <a href="index.html" class="back-btn">Back to previous page. &rarr;</a>
             </div>
             <div class="login_img_bottom">
                 <h2>Life is simpler,<br>than it seems</h2>
@@ -41,12 +41,19 @@
                     <input type="password" placeholder="Password" id="signup_password">
                     <button type="button" class="eye_btn" onclick="togglePassword('signup_password', this)">👁</button>
                 </div>
+                <div class="password_rules">
+                    <p id="upper">✗ First letter must be uppercase</p>
+                    <p id="length">✗ At least 8 characters</p>
+                    <p id="number">✗ Contains a number</p>
+                    <p id="symbol">✗ Contains a symbol</p>
+                </div>
 
                 <label class="terms">
                     <input type="checkbox" id="terms" required>
                     I agree to the
                     <a href="terms.html" target="_blank">Terms and Conditions</a>
                 </label>
+                <a href="terms.html" target="_blank">Terms and Conditions</a>
 
                 <button type="button" onclick="submitSignup()">Create account</button>
             </form>
