@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Website</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
 
@@ -31,14 +31,14 @@
                 </p>
 
                 <div class="name_row">
-                    <input type="text" placeholder="First Name">
-                    <input type="text" placeholder="Last Name">
+                    <input type="text" id="firstname" placeholder="First Name" required>
+                    <input type="text" id="lastname" placeholder="Last Name" required>
                 </div>
-                <input type="text" placeholder="Company ID">
-                <input type="email" placeholder="Email Address">
+                <input type="text" id="companyID" placeholder="Company ID" required>
+                <input type="email" id="email" placeholder="Email Address" required>
 
                 <div class="password_field">
-                    <input type="password" placeholder="Password" id="signup_password">
+                    <input type="password" placeholder="Password" id="signup_password" required>
                     <button type="button" class="eye_btn" onclick="togglePassword('signup_password', this)">👁</button>
                 </div>
                 <div class="password_rules">
@@ -53,7 +53,7 @@
                     I agree to the
                     <a href="terms.html" target="_blank">Terms and Conditions</a>
                 </label>
-                <a href="terms.html" target="_blank">Terms and Conditions</a>
+                <div id="termsError" class="error-message"></div>
 
                 <button type="button" onclick="submitSignup()">Create account</button>
             </form>
@@ -85,6 +85,6 @@
         </div>
     </div>
 
-    <script src="script.js" defer></script>
+    <script src="login.js" defer></script>
 </body>
 </html>

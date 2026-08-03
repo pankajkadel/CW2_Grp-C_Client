@@ -358,3 +358,37 @@ input[type="checkbox"] {
     }
 }
 
+
+/* Alert system if user didnot fill the space*/
+.input-error {
+    border: 1px solid red !important;
+}
+
+.input-error::placeholder {
+    color: red;
+}
+
+/*Password rules*/
+.password_rules p {
+    font-size: 13px;
+    color: red;
+    margin-top: 5px;
+}
+
+.password_rules .valid {
+    color: green;
+}
+
+.password_rules {
+    display: none;
+}
+
+.password_rules.show {
+    display: block;
+}
+
+/* term error */
+.error-message {
+    color: red;
+    font-size: 13px;
+}
