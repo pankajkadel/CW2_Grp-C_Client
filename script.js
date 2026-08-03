@@ -40,12 +40,3 @@ function togglePassword(inputId, btn) {
     }
 }
 
-// Handle the "Create account" click
-function submitSignup() {
-    const terms = document.getElementById('terms');
-    if (!terms.checked) {
-        alert('Please agree to the Terms and Conditions to continue.');
-        return;
-    }
-    alert('Your company account has been create, please login with the email and password you provided.');
-}
