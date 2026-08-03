@@ -77,6 +77,32 @@ body {
     letter-spacing: 1px;
 }
 
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    text-decoration: none;
+    backdrop-filter: blur(6px);
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.login_img_bottom {
+    position: absolute;
+    left: 36px;
+    right: 36px;
+    bottom: 36px;
+    z-index: 2;
+}
+
 .signup_img_bottom {
     position: absolute;
     left: 36px;
