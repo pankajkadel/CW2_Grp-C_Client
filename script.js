@@ -126,6 +126,8 @@ function submitSignup() {
     const email = document.getElementById("email");
     const signup_password = document.getElementById("signup_password");
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const terms = document.getElementById("terms");
+    const termsError = document.getElementById("termsError");
 
     // remove old errors first
     firstname.classList.remove("input-error");
@@ -158,6 +160,13 @@ function submitSignup() {
     if (!emailPattern.test(email.value)) {
         email.classList.add("input-error");
     }
+    if (!terms.checked) {
+        termsError.textContent = "Please accept the Terms and Conditions.";
+        return;
+    }else {
+        termsError.textContent = "";
+    }
     
 
 }
+

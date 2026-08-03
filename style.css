@@ -370,3 +370,9 @@ input[type="checkbox"] {
 .password_rules.show {
     display: block;
 }
+
+/* term error */
+.error-message {
+    color: red;
+    font-size: 13px;
+}
