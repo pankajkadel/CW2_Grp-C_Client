@@ -198,7 +198,9 @@ function submitSignup() {
     const company = {
         name: companyname.value,
         email: email.value,
+        password: signup_password.value,
         id: companyID,
+        role:"admin",
         employees: []
     };
 
@@ -214,7 +216,5 @@ function submitSignup() {
     window.location.href = "success.html";
 
 }
-
-
 
 
