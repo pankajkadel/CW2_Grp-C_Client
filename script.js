@@ -40,6 +40,19 @@ function togglePassword(inputId, btn) {
     }
 }
 
+function onlyLetters(input) {
+    input.value = input.value.replace(/[^a-zA-Z\s]/g, "");
+}
+
+document.getElementById("firstname").addEventListener("input", function () {
+    onlyLetters(this);
+});
+
+document.getElementById("lastname").addEventListener("input", function () {
+    onlyLetters(this);
+});
+
+
 // Alert for empty place
 function submitSignup() {
 
