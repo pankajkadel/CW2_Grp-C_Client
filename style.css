@@ -316,3 +316,12 @@ input[type="checkbox"] {
     transform: translateY(1px);
 }
 
+
+/* Alert system if user didnot fill the space*/
+.input-error {
+    border: 1px solid red !important;
+}
+
+.input-error::placeholder {
+    color: red;
+}

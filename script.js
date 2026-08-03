@@ -40,3 +40,43 @@ function togglePassword(inputId, btn) {
     }
 }
 
+// Alert for empty place
+function submitSignup() {
+
+    const firstname = document.getElementById("firstname");
+    const lastname = document.getElementById("lastname");
+    const companyname = document.getElementById("companyname");
+    const email = document.getElementById("email");
+    const signup_password = document.getElementById("signup_password");
+
+
+    // remove old errors first
+    firstname.classList.remove("input-error");
+    lastname.classList.remove("input-error");
+    companyname.classList.remove("input-error");
+    email.classList.remove("input-error");
+    signup_password.classList.remove("input-error");
+
+
+    // check empty fields
+    if (firstname.value.trim() === "") {
+        firstname.classList.add("input-error");
+    }
+
+    if (lastname.value.trim() === "") {
+        lastname.classList.add("input-error");
+    }
+
+    if (companyname.value.trim() === "") {
+        companyname.classList.add("input-error");
+    }
+
+    if (email.value.trim() === "") {
+        email.classList.add("input-error");
+    }
+
+    if (signup_password.value.trim() === "") {
+        signup_password.classList.add("input-error");
+    }
+
+}
