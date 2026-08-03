@@ -116,6 +116,16 @@ password.addEventListener("input", function () {
 
 });
 
+// generating unique company id
+function generateCompanyID() {
+    const random = Math.random()
+        .toString(36)
+        .substring(2, 8)
+        .toUpperCase();
+
+    return "SHFT-" + random;
+}
+
 
 // Alert for empty place
 function submitSignup() {
@@ -136,37 +146,75 @@ function submitSignup() {
     email.classList.remove("input-error");
     signup_password.classList.remove("input-error");
 
-
+    let valid = true;
     // check empty fields
     if (firstname.value.trim() === "") {
-        firstname.classList.add("input-error");
+    firstname.classList.add("input-error");
+    valid = false;
     }
 
     if (lastname.value.trim() === "") {
         lastname.classList.add("input-error");
+        valid = false;
     }
 
     if (companyname.value.trim() === "") {
         companyname.classList.add("input-error");
+        valid = false;
     }
 
     if (email.value.trim() === "") {
         email.classList.add("input-error");
+        valid = false;
     }
 
     if (signup_password.value.trim() === "") {
         signup_password.classList.add("input-error");
+        valid = false;
     }
+
     if (!emailPattern.test(email.value)) {
         email.classList.add("input-error");
+        valid = false;
     }
+
     if (!terms.checked) {
         termsError.textContent = "Please accept the Terms and Conditions.";
-        return;
-    }else {
+        valid = false;
+    } else {
         termsError.textContent = "";
     }
-    
+    // Stop if something is wrong
+    if (!valid) {
+        return;
+    }
+
+
+    // Generate company ID
+    const companyID = generateCompanyID();
+
+
+    // Create company object
+    const company = {
+        name: companyname.value,
+        email: email.value,
+        id: companyID,
+        employees: []
+    };
+
+
+    // Save company
+    localStorage.setItem(
+        "company",
+        JSON.stringify(company)
+    );
+
+
+    // Go to success page
+    window.location.href = "success.html";
 
 }
+
+
+
 
