@@ -34,12 +34,12 @@
                     <input type="text" id="firstname" placeholder="First Name" required>
                     <input type="text" id="lastname" placeholder="Last Name" required>
                 </div>
-                <input type="text" id="companyID" placeholder="Company ID" required>
-                <input type="email" id="email" placeholder="Email Address" required>
+                <input type="text" id="signup_companyID" placeholder="Company ID" required>
+                <input type="email" id="signup_email" placeholder="Email Address" required>
 
                 <div class="password_field">
                     <input type="password" placeholder="Password" id="signup_password" required>
-                    <button type="button" class="eye_btn" onclick="togglePassword('signup_password', this)">👁</button>
+                    <button type="button" class="eye_btn" onclick="togglePassword('login_password', this)">👁</button>
                 </div>
                 <div class="password_rules">
                     <p id="upper">✗ First letter must be uppercase</p>
@@ -64,8 +64,8 @@
                 <p>Don't have an account?
                     <a href="#" onclick="showSignup(); return false;">Create Account</a>
                 </p>
-
-                <input type="email" placeholder="Email Address">
+                <input type="text" id="login_companyID" placeholder="Company ID" required>
+                <input type="email" id="login_email" placeholder="Email Address" required>
 
                 <div class="password_field">
                     <input type="password" placeholder="Password" id="login_password">
@@ -79,7 +79,7 @@
                     </label>
                     <a href="#">Forgot password?</a>
                 </div>
-                <button type="submit">Login</button>
+                <button type="button" onclick="loginUser()">Login</button>
             </form>
             
         </div>

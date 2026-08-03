@@ -56,10 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('signup').classList.add('active');
 
     const loginForm = document.getElementById('login');
-    loginForm.addEventListener('submit', (e) => {
+
+    loginForm.addEventListener('submit', function(e){
         e.preventDefault();
-        // Put your real login logic / API call here
-        alert('Login submitted!');
+        loginUser();
     });
 });
 
@@ -142,8 +142,8 @@ function submitSignup() {
 
     const firstname = document.getElementById("firstname");
     const lastname = document.getElementById("lastname");
-    const companyID = document.getElementById("companyID");
-    const email = document.getElementById("email");
+    const companyID = document.getElementById("signup_companyID");
+    const email = document.getElementById("signup_email");
     const signup_password = document.getElementById("signup_password");
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const terms = document.getElementById("terms");
@@ -167,7 +167,7 @@ function submitSignup() {
         lastname.classList.add("input-error");
         valid = false;
     }
-    
+
     if (companyID.value.trim() === "") {
     companyID.classList.add("input-error");
     valid = false;
@@ -183,7 +183,7 @@ function submitSignup() {
         valid = false;
     }
 
-    if (!emailPattern.test(email.value)) {
+    if (!emailPattern.test(signup_email.value)) {
         email.classList.add("input-error");
         valid = false;
     }
@@ -236,4 +236,73 @@ function submitSignup() {
 
     // Optional: clear the form
     document.getElementById("signup").reset();
+}
+
+function loginUser() {
+
+    const email = document.getElementById("login_email").value.trim();
+    const password = document.getElementById("login_password").value.trim();
+    const companyID = document.getElementById("login_companyID").value.trim();
+
+
+    console.log("Entered email:", email);
+    console.log("Entered password:", password);
+    console.log("Entered company ID:", companyID);
+
+    // Check admin login
+    const company = JSON.parse(localStorage.getItem("company"));
+
+    console.log("Company data:", company);
+
+    if (
+        company &&
+        company.email === email &&
+        company.password === password &&
+        company.id === companyID
+    ) {
+
+        console.log("Admin login successful");
+
+        localStorage.setItem(
+            "currentUser",
+            JSON.stringify(company)
+        );
+
+        window.location.href = "admin_dashboard.html";
+        return;
+    }
+
+    // check staff account
+    const staffApplications =
+        JSON.parse(localStorage.getItem("staffApplications")) || [];
+
+    console.log("Staff applications:", staffApplications);
+
+
+    const staff = staffApplications.find(user =>
+        user.email === email &&
+        user.password === password &&
+        user.companyID === companyID &&
+        user.status === "approved"
+    );
+
+
+    console.log("Matched staff:", staff);
+
+
+    if (staff) {
+
+        localStorage.setItem(
+            "currentUser",
+            JSON.stringify(staff)
+        );
+
+        window.location.href = "staff_dashboard.html";
+
+    } else {
+
+        alert("Invalid login details or account not approved yet.");
+
+    }
+
 }
