@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Home Page</title>
+    </head>
+    <link rel="stylesheet" href="style.css">
+    <body>
+        <header class="nav" id="nav">
+            <div class="nav_inner">
+                <div class="logo">Shifty</div>
+                <nav class="nav_links">
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#stats">Company</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+
+                <div class="nav_actions">
+                    <a href="signup.html" class="btn btn_ghost">Create a new company</a>
+                    <a href="login.html" class="btn btn_primary">Login / Request</a>
+                </div>
+
+                <button class="nav_burger" id="navBurger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+            <div class="nav_mobile" id="navMobile">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#stats">Company</a>
+                <a href="#contact">Contact</a>
+                <a href="signup.html" class="btn btn_ghost">Create a new company</a>
+                <a href="login.html" class="btn btn_primary">Login / Request</a>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="hero_bg">
+                <img src="images/image1.jpg" alt="">
+                <div class="hero_overlay"></div>
+            </div>
+
+            <div class="hero_content">
+                <h3 class="eyebrow">Life is simpler, than it seems</h3>
+                <h1>Manage your company's<br>work, all in one place</h1>
+                <p>Set up your organization in minutes, or request access to a company that's already using shifty.</p>
+
+                <div class="hero_actions">
+                    <a href="signup.html" class="btn btn_primary btn_lg">Create a new company</a>
+                    <a href="login.html" class="btn btn_outline btn_lg">Login / Request access</a>
+                </div>
+            </div>
+
+            <a href="#about" class="scroll_hint" aria-label="Scroll down">
+                <span></span>
+            </a>
+        </section>
+
+
+        <!--  ABOUT / COMPANY DETAIL  -->
+        <section class="about" id="about">
+            <div class="about_grid">
+                <div class="about_img">
+                    <img src="images/image2.jpg" alt="">
+                </div>
+                <div class="about_text">
+                    <span class="tag">Who we are</span>
+                    <h2>Built for teams that move fast</h2>
+                    <p>
+                        Shifty brings your company's people, projects, and approvals into a single
+                        workspace. Create your organization, invite your team, and start
+                        working together the same day — no lengthy setup, no scattered tools.
+                    </p>
+                    <ul class="check_list">
+                        <li>One workspace for your whole company</li>
+                        <li>Role-based access, approvals built in</li>
+                        <li>Get started in minutes, not weeks</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!--  STATS of active user/uptime/onboards company-->
+        <section class="stats" id="stats">
+            <div class="stats_grid">
+                <div class="stat">
+                    <span class="stat_num" data-target="500">0</span>
+                    <span class="stat_label">Companies onboarded</span>
+                </div>
+                <div class="stat">
+                    <span class="stat_num" data-target="12000">0</span>
+                    <span class="stat_label">Active users</span>
+                </div>
+                <div class="stat">
+                    <span class="stat_num" data-target="98">0</span>
+                    <span class="stat_label">% uptime</span>
+                </div>
+                <div class="stat">
+                    <span class="stat_num" data-target="24">0</span>
+                    <span class="stat_label">Hour support</span>
+                </div>
+            </div>
+        </section>
+        <section class="services" id="services">
+            <span class="tag center">What you get</span>
+            <h2 class="center">Everything your company needs to get moving</h2>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card_icon">🏢</div>
+                    <h3>Company workspace</h3>
+                    <p>A dedicated space for your organization — projects, people, and files, all together.</p>
+                </div>
+                <div class="card">
+                    <div class="card_icon">🔐</div>
+                    <h3>Secure access</h3>
+                    <p>Approve who joins your company and control what each role can see and do.</p>
+                </div>
+                <div class="card">
+                    <div class="card_icon">⚡</div>
+                    <h3>Fast onboarding</h3>
+                    <p>Create an account and be up and running the same day — no setup calls required.</p>
+                </div>
+                <div class="card">
+                    <div class="card_icon">📊</div>
+                    <h3>Clear visibility</h3>
+                    <p>See what's happening across your company at a glance, from one dashboard.</p>
+                </div>
+            </div>
+        </section>
+        <section class="cta_band" id="contact">
+            <h2>Ready to bring your company on board?</h2>
+            <p>Create a new company workspace, or request access if your company already uses shifty.</p>
+            <div class="hero_actions center">
+                <a href="signup.html" class="btn btn_primary btn_lg">Create a new company</a>
+                <a href="login.html" class="btn btn_outline btn_lg">Login / Request access</a>
+            </div>
+        </section>
+
+        <!-- Create a footer at the end of the website -->
+        <footer class="footer">
+            <div class="footer_inner">
+                <div class="logo">Shifty</div>
+                <p>&copy; 2026 Shifty. All rights reserved.</p>
+                <div class="footer_links">
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+        </footer>
+
+        <script src="script.js" defer></script>
+
+    </body>
+</html>
