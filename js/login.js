@@ -1,17 +1,16 @@
-
-// Add the loop to slide the image one after another.
+// Creating a loop for image that will slide one after another and continuously
 const slideImages = [
-    'images/image1.jpg',
-    'images/image2.jpg',
-    'images/image3.jpg',
-    'images/image4.jpg'
+    '../images/image1.jpg',
+    '../images/image2.jpg',
+    '../images/image3.jpg',
+    '../images/image4.jpg'
 ];
  
 let slideIndex = 0;
  
 function startSlideshow() {
     const img = document.getElementById('slide_img');
-    if (!img || slideImages.length < 2) return;
+    if (!img || slideImages.length < 2) return; // nothing to rotate
  
     setInterval(() => {
         slideIndex = (slideIndex + 1) % slideImages.length;
@@ -27,8 +26,18 @@ function startSlideshow() {
 }
 startSlideshow();
 
+function showLogin() {
+    document.getElementById('signup').classList.remove('active');
+    document.getElementById('login').classList.add('active');
+}
 
-// Password hide and see
+function showSignup() {
+    document.getElementById('login').classList.remove('active');
+    document.getElementById('signup').classList.add('active');
+}
+
+
+// Show/hide password text.
 function togglePassword(inputId, btn) {
     const input = document.getElementById(inputId);
     if (input.type === 'password') {
@@ -39,6 +48,20 @@ function togglePassword(inputId, btn) {
         btn.textContent = '👁️';
     }
 }
+
+
+// Handle login form submit (prevents page reload)
+document.addEventListener('DOMContentLoaded', () => {
+    // Show the signup form by default
+    document.getElementById('signup').classList.add('active');
+
+    const loginForm = document.getElementById('login');
+
+    loginForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        loginUser();
+    });
+});
 
 // only letter on name place.
 
@@ -55,8 +78,6 @@ document.getElementById("lastname").addEventListener("input", function () {
 });
 
 
-
-//password rules.
 const password = document.getElementById("signup_password");
 const passwordRules = document.querySelector(".password_rules");
 
@@ -116,24 +137,13 @@ password.addEventListener("input", function () {
 
 });
 
-// generating unique company id
-function generateCompanyID() {
-    const random = Math.random()
-        .toString(36)
-        .substring(2, 8)
-        .toUpperCase();
-
-    return "SHFT-" + random;
-}
-
-
 // Alert for empty place
 function submitSignup() {
 
     const firstname = document.getElementById("firstname");
     const lastname = document.getElementById("lastname");
-    const companyname = document.getElementById("companyname");
-    const email = document.getElementById("email");
+    const companyID = document.getElementById("signup_companyID");
+    const email = document.getElementById("signup_email");
     const signup_password = document.getElementById("signup_password");
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const terms = document.getElementById("terms");
@@ -142,7 +152,7 @@ function submitSignup() {
     // remove old errors first
     firstname.classList.remove("input-error");
     lastname.classList.remove("input-error");
-    companyname.classList.remove("input-error");
+    companyID.classList.remove("input-error");
     email.classList.remove("input-error");
     signup_password.classList.remove("input-error");
 
@@ -158,9 +168,9 @@ function submitSignup() {
         valid = false;
     }
 
-    if (companyname.value.trim() === "") {
-        companyname.classList.add("input-error");
-        valid = false;
+    if (companyID.value.trim() === "") {
+    companyID.classList.add("input-error");
+    valid = false;
     }
 
     if (email.value.trim() === "") {
@@ -173,7 +183,7 @@ function submitSignup() {
         valid = false;
     }
 
-    if (!emailPattern.test(email.value)) {
+    if (!emailPattern.test(signup_email.value)) {
         email.classList.add("input-error");
         valid = false;
     }
@@ -184,37 +194,115 @@ function submitSignup() {
     } else {
         termsError.textContent = "";
     }
-    // Stop if something is wrong
-    if (!valid) {
+        if (!valid) {
+        return;
+    }
+
+    // Check company exists
+    const company = JSON.parse(localStorage.getItem("company"));
+
+    if (!company) {
+        alert("No company exists.");
+        return;
+    }
+     if (company.id !== companyID.value.trim()) {
+        alert("Invalid Company ID.");
         return;
     }
 
 
-    // Generate company ID
-    const companyID = generateCompanyID();
-
-
-    // Create company object
-    const company = {
-        name: companyname.value,
-        email: email.value,
-        password: signup_password.value,
-        id: companyID,
-        role:"admin",
-        employees: []
+    // Create staff object
+    const staff = {
+    name: firstname.value + " " + lastname.value,
+    email: email.value,
+    password: signup_password.value,
+    companyID: companyID.value,
+    role: "staff",
+    status: "pending"
     };
 
 
-    // Save company
+    let staffApplications =
+        JSON.parse(localStorage.getItem("staffApplications")) || [];
+
+    staffApplications.push(staff);
+
     localStorage.setItem(
-        "company",
-        JSON.stringify(company)
+        "staffApplications",
+        JSON.stringify(staffApplications)
+    );
+
+    alert("Application submitted successfully! Please wait for manager approval.");
+
+    // Optional: clear the form
+    document.getElementById("signup").reset();
+}
+
+function loginUser() {
+
+    const email = document.getElementById("login_email").value.trim();
+    const password = document.getElementById("login_password").value.trim();
+    const companyID = document.getElementById("login_companyID").value.trim();
+
+
+    console.log("Entered email:", email);
+    console.log("Entered password:", password);
+    console.log("Entered company ID:", companyID);
+
+    // Check admin login
+    const company = JSON.parse(localStorage.getItem("company"));
+
+    console.log("Company data:", company);
+
+    if (
+        company &&
+        company.email === email &&
+        company.password === password &&
+        company.id === companyID
+    ) {
+
+        console.log("Admin login successful");
+
+        localStorage.setItem(
+            "currentUser",
+            JSON.stringify(company)
+        );
+
+        window.location.href = "admin_dashboard.html";
+        return;
+    }
+
+    // check staff account
+    const staffApplications =
+        JSON.parse(localStorage.getItem("staffApplications")) || [];
+
+    console.log("Staff applications:", staffApplications);
+
+
+    const staff = staffApplications.find(user =>
+        user.email === email &&
+        user.password === password &&
+        user.companyID === companyID &&
+        user.status === "approved"
     );
 
 
-    // Go to success page
-    window.location.href = "success.html";
+    console.log("Matched staff:", staff);
+
+
+    if (staff) {
+
+        localStorage.setItem(
+            "currentUser",
+            JSON.stringify(staff)
+        );
+
+        window.location.href = "staff_dashboard.html";
+
+    } else {
+
+        alert("Invalid login details or account not approved yet.");
+
+    }
 
 }
-
-
