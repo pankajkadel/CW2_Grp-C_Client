@@ -1,0 +1,54 @@
+/* Ensure zero horizontal overflow on the root elements */
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Force main content to fit within screen boundaries */
+.main-content {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  overflow-x: hidden;
+}
+
+/* Prevent fixed grid children from overflowing mobile screens */
+.grid-top, 
+.grid-actions, 
+.grid-bottom {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure individual cards take full available width without breaking */
+.card, 
+.action-card {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Fix mobile viewport breakpoint */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    width: 100vw;
+  }
+
+  .sidebar {
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  .grid-top,
+  .grid-actions,
+  .grid-bottom {
+    grid-template-columns: 1fr !important;
+  }
+}
