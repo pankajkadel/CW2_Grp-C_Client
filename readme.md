@@ -76,6 +76,3 @@ The Staff Dashboard implementation is available in the `Staff_Dashboard` branch.
 ## Developed By
 Riya Mol Thomas
 CW2 Group C – Client-Side Development Project
-
-Ria Mulryan
-CW2 Group C – Client-Side Development Project
