@@ -116,3 +116,34 @@ Employees can:
 ---
 
 # Project Structure
+
+```
+CW2_Grp-C_Client/
+│
+├── html/ # All website pages
+│ ├── home.html # Landing page
+│ ├── signup.html # Company registration page
+│ ├── login.html # User login page
+│ ├── terms.html # Terms and Conditions
+│ └── success.html # Successful registration page
+│
+├── css/ # Website styling files
+│ ├── home.css # Home page styling
+│ ├── signup.css # Signup page styling
+│ └── login.css # Login page styling
+│
+├── js/ # JavaScript functionality
+│ ├── home.js # Navigation and home page scripts
+│ ├── signup.js # Company and staff registration logic
+│ └── login.js # Authentication and role checking
+│
+├── images/ # Website images
+│ ├── image1.jpg # Login/Home background image
+│ ├── image2.jpg
+│ ├── image3.jpg
+│ └── image4.jpg
+│
+├── README.md # Project documentation
+│
+└── .gitignore # Git ignored files
+```
