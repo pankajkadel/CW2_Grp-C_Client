@@ -218,7 +218,8 @@ function submitSignup() {
     password: signup_password.value,
     companyID: companyID.value,
     role: "staff",
-    status: "pending"
+    status: "pending",
+    shifts:[]
     };
 
 
@@ -271,6 +272,15 @@ function loginUser() {
         window.location.href = "admin_dashboard.html";
         return;
     }
+    //check if the email already exit.
+        const exists = staffApplications.find(
+            user => user.email === email.value
+        );
+
+        if(exists){
+            alert("Email already registered");
+            return;
+        }
 
     // check staff account
     const staffApplications =
