@@ -13,14 +13,14 @@
   <header class="topbar reveal" style="animation-delay:.02s">
     <div class="brand">
       <div class="brand-mark display">S</div>
-      <span class="brand-name">COMPANY LOGO</span>
+      <span class="brand-name">SHIFTY</span>
     </div>
     <div class="profile">
       <div class="profile-text">
-        <div class="profile-name">JOHN SMITH</div>
-        <div class="profile-role">Administrator</div>
+        <div class="profile-name" id="profileName"></div>
+        <div class="profile-role" id="profileRole"></div>
       </div>
-      <div class="avatar display">JS</div>
+      <div class="avatar display" id="profileAvatar"></div>
     </div>
   </header>
  
@@ -126,7 +126,7 @@
   <button class="nav-btn" data-nav aria-label="Team">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2s6.5 2.6 6.5 6.2"/><circle cx="17.5" cy="9" r="2.5"/><path d="M15.8 13.5c2.6.3 4.7 2.5 4.7 5.5"/></svg>
   </button>
-  <button class="nav-btn" data-nav aria-label="Schedule">
+  <button class="nav-btn" onclick="openSchedule()" aria-label="Schedule">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
   </button>
   <button class="nav-btn" data-nav aria-label="Calendar">
@@ -139,9 +139,36 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
   </button>
 </nav>
+<section id="schedulePage" style="display:none">
+
+  <h2>Assign Employee Shift</h2>
+
+  <select id="employeeSelect">
+
+    <option>
+      Select Employee
+    </option>
+  </select>
+
+  <select id="shiftSelect">
+
+    <option>Morning Shift</option>
+    <option>Evening Shift</option>
+    <option>Night Shift</option>
+  </select>
+
+  <input type="date" id="shiftDate">
+  <input type="time" id="startTime">
+  <input type="time" id="endTime">
+
+  <button onclick="assignShift()">
+    Assign Shift
+  </button>
+
+</section>
  
 <div class="toast" id="toast"></div>
-<script src="admin_dashboard" defer></script>
+<script src="admin_dashboard.js" defer></script>
  
 </body>
 </html>
