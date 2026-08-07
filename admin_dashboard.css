@@ -425,3 +425,229 @@
     z-index: 30;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* employees */
+
+.employee-page {
+    margin: 0;
+    padding: 0;
+}  
+.employee-page .wrap {
+
+    max-width: 980px;
+    margin: 0 auto;
+    padding-top: 0px;
+}
+s
+.employee-page .emp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.employee-page .emp-header h1 {
+    font-size: 26px;
+    margin: 0 0 4px;
+    letter-spacing: -0.02em;
+}
+
+.employee-page .emp-header p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.employee-page .emp-header .stats {
+    display: flex;
+    gap: 12px;
+}
+
+.employee-page .stat {
+    background: var(--bg-card);
+    border: 1px solid var(--bg-field-border);
+    border-radius: 10px;
+    padding: 10px 16px;
+    min-width: 88px;
+    text-align: center;
+}
+
+.employee-page .stat .num {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.employee-page .stat .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.employee-page .stat.pending .num {
+    color: var(--accent-soft);
+}
+
+.employee-page .stat.approved .num {
+    color: #7ee8b0;
+}
+
+.employee-page .panel {
+    background: var(--bg-card);
+    border: 1px solid var(--bg-field-border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.employee-page .panel h2 {
+    font-size: 15px;
+    margin: 0 0 14px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+}
+
+.employee-page #employeeList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+}
+
+.employee-page .employee-card {
+    background: var(--bg-field);
+    border: 1px solid var(--bg-field-border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.15s ease;
+}
+
+.employee-page .employee-card:hover {
+    border-color: var(--accent);
+}
+
+.employee-page .employee-card h3 {
+    margin: 0 0 2px;
+    font-size: 16px;
+}
+
+.employee-page .employee-card p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.employee-page .badge {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    width: fit-content;
+}
+
+.employee-page .badge.pending {
+    background: rgba(124, 111, 232, 0.18);
+    color: var(--accent-soft);
+}
+
+.employee-page .badge.approved {
+    background: rgba(126, 232, 176, 0.15);
+    color: #7ee8b0;
+}
+
+.employee-page .employee-card button {
+    margin-top: 10px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.employee-page .employee-card button:hover {
+    background: var(--accent-hover);
+}
+
+.employee-page .active-note {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #7ee8b0;
+}
+
+.employee-page .empty {
+    color: var(--text-muted);
+    font-size: 14px;
+    padding: 20px 0;
+}
+
+.employee-page select#approveemployee {
+    width: 100%;
+    background: var(--bg-field);
+    color: var(--text-primary);
+    border: 1px solid var(--bg-field-border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+}
+
+.employee-page select#approveemployee:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.employee-page .addform {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.employee-page .addform input {
+    flex: 1;
+    min-width: 160px;
+    background: var(--bg-field);
+    border: 1px solid var(--bg-field-border);
+    color: var(--text-primary);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+}
+
+.employee-page .addform input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.employee-page .addform button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.employee-page .addform button:hover {
+    background: var(--accent-hover);
+}
+
+.employee-page .note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 10px;
+}
