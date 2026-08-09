@@ -69,30 +69,29 @@ function showToast(msg) {
   toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
 }
 
-// diaplay employee name/ company name / role
+// display company avatar
+const initials = JSON.parse(localStorage.getItem("currentUser"))
+    .companyName
+    .trim()
+    .split(/\s+/)
+    .map(word => word[0])
+    .join("")
+    .substring(0, 3)
+    .toUpperCase();
 
+document.getElementById("profileAvatar").textContent = initials;
+
+//display employee name/ company name / role
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
 if(currentUser){
 
     document.getElementById("profileName").textContent =
-        currentUser.name;
+        currentUser.companyName;
 
     document.getElementById("profileRole").textContent =
         currentUser.role;
-
-    document.getElementById("companyName").textContent =
-        currentUser.name;
-
-        // First letters of the name
-    const initials = currentUser.name
-        .split(" ")
-        .map(word => word[0])
-        .join("")
-        .toUpperCase();
-
-    document.getElementById("profileAvatar").textContent = initials;
-    
+        
 
 }
 // hide the page
@@ -109,6 +108,7 @@ function hideAllPages(){
         "#swapPage",
         "#dropPage",
         "#leavePage"
+        
     ];
 
 
@@ -122,6 +122,9 @@ function hideAllPages(){
 
     });
 
+}
+function backtohome(){
+  openHome();
 }
 //open timeoff
 function openTimeOffPage(){
@@ -909,6 +912,7 @@ function openEmployees(){
   document.getElementById("employeePage").style.display="block";
 
   showEmployees();
+  loadApprovedEmployees();
 
   updateEmployeeStats();
   saveCurrentPage("employee");
@@ -951,7 +955,7 @@ function openNotifications(){
 
     hideAllPages();    
     document.getElementById("notificationPage").style.display="block";
-    saveCurrentPage("notification");
+    saveCurrentPage("notifications");
     showNotifications();
 
 
@@ -1050,6 +1054,45 @@ function approveEmployee(email){
     showEmployees();
     updateEmployeeStats();
 
+}
+function loadApprovedEmployees() {
+
+    const currentUser =
+        JSON.parse(localStorage.getItem("currentUser"));
+
+    const employees =
+        (JSON.parse(localStorage.getItem("staffApplications")) || [])
+        .filter(employee =>
+            employee.companyID === currentUser.companyID &&
+            employee.status === "approved"
+        );
+
+    const select =
+        document.getElementById("approveemployee");
+
+    select.innerHTML = "";
+
+    if (employees.length === 0) {
+
+        const option = document.createElement("option");
+        option.textContent = "No approved employees";
+        option.disabled = true;
+        option.selected = true;
+
+        select.appendChild(option);
+
+        return;
+    }
+
+    employees.forEach(employee => {
+
+        const option = document.createElement("option");
+
+        option.value = employee.email;
+        option.textContent = employee.name;
+
+        select.appendChild(option);
+    });
 }
 //count the total, active and pending employees
 function updateEmployeeStats(){
@@ -1231,9 +1274,27 @@ function assignShift(){
 
 }
 
+function getShiftStatus(shift) {
+
+    const now = new Date();
+
+    const start = new Date(`${shift.date}T${shift.start}`);
+    const end = new Date(`${shift.date}T${shift.end}`);
+
+    if (now < start) {
+        return "Upcoming";
+    }
+
+    if (now >= start && now <= end) {
+        return "In Progress";
+    }
+
+    return "Completed";
+}
 
 // show assigned shift.
 function showAssignedShifts(){
+  
 
     const currentUser =
     JSON.parse(localStorage.getItem("currentUser"));
@@ -1572,10 +1633,6 @@ function sendNotification(requestType){
 
 }
 
-sendNotification("Time Off");
-sendNotification("Shift Swap");
-sendNotification("Drop Shift");
-sendNotification("Leave");
 
 
 // today schedule
