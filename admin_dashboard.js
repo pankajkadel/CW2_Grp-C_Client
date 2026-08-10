@@ -426,7 +426,7 @@ function openDropPage(){
     document.getElementById("dropPage").style.display = "block";
     saveCurrentPage("drop");
     showDropRequests();
-
+  
 }
 
 // show drop request
@@ -583,7 +583,7 @@ if(status === "approved"){
 
 
     }
-
+    
 
 }
 
@@ -1606,7 +1606,8 @@ function sendNotification(requestType){
 
     const currentUser =
     JSON.parse(localStorage.getItem("currentUser"));
-
+   const message =
+    `${currentUser.name} sent a ${requestType} request`;
 
     notifications.push({
 
@@ -1614,8 +1615,7 @@ function sendNotification(requestType){
 
         employeeEmail: currentUser.email,
 
-        message:
-        `${currentUser.name} sent a ${requestType} request`,
+        message: message,
 
         type: requestType,
 
@@ -1630,10 +1630,37 @@ function sendNotification(requestType){
         "notifications",
         JSON.stringify(notifications)
     );
+    showNotificationPopup(message);
 
 }
 
+function showNotificationPopup(message) {
 
+    const popup = document.createElement("div");
+
+    popup.className = "notification-popup";
+
+    popup.innerHTML = `
+        <strong>🔔 Notification</strong>
+        <p>${message}</p>
+    `;
+
+    document.body.appendChild(popup);
+
+    setTimeout(() => {
+        popup.classList.add("show");
+    }, 10);
+
+    setTimeout(() => {
+
+        popup.classList.remove("show");
+
+        setTimeout(() => {
+            popup.remove();
+        }, 300);
+
+    }, 4000);
+}
 
 // today schedule
 function showTodaySchedule(){

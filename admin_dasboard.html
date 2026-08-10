@@ -302,6 +302,33 @@
 
 </section>
 <!-- More page -->
+ <section id="morePage" style="display:none">
+  <h2 class="employee-heading">
+    <button class="employee-title" onclick="openEmployees()" aria-label="Employees">
+        <svg class="employee-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2s6.5 2.6 6.5 6.2"/><circle cx="17.5" cy="9" r="2.5"/><path d="M15.8 13.5c2.6.3 4.7 2.5 4.7 5.5"/></svg>
+
+        <span>Employees</span>
+    </button>
+  </h2>
+  <h2 class="employee-heading">
+      <button class="employee-title" onclick="openSchedule()" aria-label="Schedule">
+      <svg class="employee-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+        <span>Schedule</span>
+    </button>
+  </h2>
+  <h2 class="employee-heading">
+    <button class="employee-title" onclick="openCalendar()" aria-label="Schedule">
+      <svg class="employee-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15h.01M12 15h.01M16 15h.01"/></svg>
+      <span>Calander</span>
+  </h2>
+  <h2 class="employee-heading">
+    <button class="employee-title" onclick="openNotifications()" aria-label="Schedule">
+      <svg class="employee-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span>Notifications</span>
+    </h2>
+  <h3>Log out</h3>
+
+ </section>
 
 <div class="toast" id="toast"></div>
 <script src="admin_dashboard.js" defer></script>

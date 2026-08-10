@@ -902,7 +902,38 @@ font-weight: 600;
 #notificationList .employee-card p {
 font-size: 12px;
 }
+.notification-popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
 
+    width: 320px;
+
+    background: white;
+    padding: 16px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+
+    z-index: 9999;
+}
+
+.notification-popup.show {
+    transform: translateX(0);
+}
+
+.notification-popup strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.notification-popup p {
+    margin: 0;
+}
 /* More page*/
 #morePage {
 display: flex;
@@ -958,4 +989,41 @@ padding: 20px 0;
   width: 100%;
   margin-right: 0;
 }
+}
+
+/* more */
+.employee-heading {
+  margin: 0;
+}
+
+.employee-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  width: auto;
+  height: auto;
+
+  padding: 0;
+  margin: 0;
+
+  border: none;
+  background: transparent;
+
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.employee-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.employee-title span {
+  display: block;
 }
