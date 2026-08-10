@@ -774,7 +774,7 @@ function openHome(){
   document.querySelector(".grid").style.display="grid";
 
   showTodaySchedule();
-
+  loadNoticeEmployees();
   updateDashboardStats();
   saveCurrentPage("home");
 
@@ -1732,5 +1732,129 @@ function showTodaySchedule(){
 }
 
 
+// send notice to the staff
 
+function loadNoticeEmployees() {
 
+    const currentUser =
+        JSON.parse(localStorage.getItem("currentUser"));
+
+    const employees =
+        (JSON.parse(localStorage.getItem("staffApplications")) || [])
+        .filter(employee =>
+            employee.companyID === currentUser.companyID &&
+            employee.status === "approved"
+        );
+
+    const select =
+        document.getElementById("noticeEmployee");
+
+    if (!select) return;
+
+    select.innerHTML = `
+        <option value="">Select Staff</option>
+        <option value="all">All Staff</option>
+    `;
+
+    employees.forEach(employee => {
+
+        const option = document.createElement("option");
+
+        option.value = employee.email;
+        option.textContent = employee.name;
+
+        select.appendChild(option);
+
+    });
+}
+
+function sendNotice() {
+
+    const employee =
+        document.getElementById("noticeEmployee").value;
+
+    const title =
+        document.getElementById("noticeTitle").value.trim();
+
+    const message =
+        document.getElementById("noticeMessage").value.trim();
+
+    // Check staff selection
+    if (!employee) {
+        alert("Please select a staff member.");
+        return;
+    }
+
+    // Check title
+    if (!title) {
+        alert("Please enter a notice title.");
+        return;
+    }
+
+    // Check message
+    if (!message) {
+        alert("Please write a notice.");
+        return;
+    }
+
+    // Get current admin
+    const currentUser =
+        JSON.parse(localStorage.getItem("currentUser")) || {};
+
+    // Get existing notifications
+    let notifications =
+        JSON.parse(localStorage.getItem("notifications")) || [];
+
+    // Get staff from this company
+    const employees =
+        (JSON.parse(localStorage.getItem("staffApplications")) || [])
+        .filter(staff => staff.companyID === currentUser.companyID);
+
+    // If sending to everyone
+    if (employee === "all") {
+
+        employees.forEach(staff => {
+
+            notifications.push({
+                id: Date.now() + Math.random(),
+                type: "Notice",
+                title: title,
+                message: message,
+                employeeEmail: staff.email,
+                companyID: currentUser.companyID,
+                sender: currentUser.companyName || "Admin",
+                date: new Date().toISOString(),
+                read: false
+            });
+
+        });
+
+    } else {
+
+        // Send to selected staff member
+        notifications.push({
+            id: Date.now(),
+            type: "Notice",
+            title: title,
+            message: message,
+            employeeEmail: employee,
+            companyID: currentUser.companyID,
+            sender: currentUser.companyName || "Admin",
+            date: new Date().toISOString(),
+            read: false
+        });
+    }
+
+    // Save notifications
+    localStorage.setItem(
+        "notifications",
+        JSON.stringify(notifications)
+    );
+
+    // Clear form
+    document.getElementById("noticeEmployee").value = "";
+    document.getElementById("noticeTitle").value = "";
+    document.getElementById("noticeMessage").value = "";
+
+    alert("Notice sent successfully!");
+}
