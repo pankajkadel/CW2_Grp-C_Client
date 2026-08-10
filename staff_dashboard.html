@@ -1,778 +1,4285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Employee Dashboard</title>
-  <script src="https://unpkg.com/feather-icons"></script>
-  
-  <style>
-    :root {
-      --bg-main: #131525;
-      --bg-sidebar: #1b1d31;
-      --bg-card: #20233b;
-      --bg-card-hover: #262a46;
-      --bg-pill: #2a2e4f;
-      --accent-purple: #6c5ce7;
-      --accent-purple-hover: #5b4cc4;
-      --accent-teal: #00cec9;
-      --accent-yellow: #fdcb6e;
-      --accent-pink: #ff7675;
-      --text-main: #ffffff;
-      --text-muted: #8d92b0;
-      --border-color: #2b2f52;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shifty - Staff Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+
+:root{
+    --background:#08111f;
+    --sidebar:#0d1626;
+    --card:#111c2b;
+    --card2:#152131;
+
+    --border:#27384d;
+
+    --text:#f4f6fa;
+    --muted:#929fb1;
+
+    --purple:#6f3ce7;
+    --green:#2ec58c;
+    --orange:#f0a128;
+    --red:#eb4553;
+    --blue:#3c9ce6;
+}
+
+/* =============================
+   RESET
+============================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+
+    min-height:100vh;
+
+    font-family:Inter,Arial,sans-serif;
+
+    color:var(--text);
+
+    background:
+        radial-gradient(
+            circle at 60% 0%,
+            rgba(102,70,210,.08),
+            transparent 32%
+        ),
+        #07111e;
+}
+
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
+
+/* =============================
+   MAIN APPLICATION
+============================= */
+
+.app{
+    min-height:100vh;
+
+    display:grid;
+
+    grid-template-columns:
+        205px
+        minmax(0,1fr);
+}
+
+/* =============================
+   SIDEBAR
+============================= */
+
+.sidebar{
+    height:100vh;
+
+    position:sticky;
+
+    top:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:24px 14px 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #0d1626,
+            #091321
+        );
+
+    border-right:
+        1px solid #1f2d40;
+}
+
+.logo{
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    margin-bottom:28px;
+
+    padding-left:7px;
+}
+
+.logo-icon{
+    width:43px;
+
+    height:43px;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #814ff3,
+            #5725c5
+        );
+
+    box-shadow:
+        0 10px 25px
+        rgba(111,60,231,.24);
+}
+
+.logo h2{
+    margin:0;
+
+    font-size:18px;
+}
+
+.logo p{
+    margin:4px 0 0;
+
+    font-size:10px;
+
+    color:var(--muted);
+}
+
+/* =============================
+   NAVIGATION
+============================= */
+
+nav{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+}
+
+.nav-item{
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+        19px
+        1fr
+        auto;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px;
+
+    border:0;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    color:#d7dce5;
+
+    background:transparent;
+
+    text-align:left;
+
+    font-size:11px;
+
+    transition:.2s;
+}
+
+.nav-item svg{
+    width:17px;
+}
+
+.nav-item:hover{
+    background:#172234;
+}
+
+.nav-item.active{
+    background:
+        linear-gradient(
+            135deg,
+            #6333cf,
+            #472494
+        );
+}
+
+.badge{
+    min-width:19px;
+
+    height:19px;
+
+    padding:0 5px;
+
+    border-radius:20px;
+
+    display:grid;
+
+    place-items:center;
+
+    background:var(--purple);
+
+    color:white;
+
+    font-size:9px;
+
+    font-weight:700;
+}
+
+/* =============================
+   SIDEBAR USER
+============================= */
+
+.sidebar-bottom{
+    margin-top:auto;
+}
+
+.sidebar-user{
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:10px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:10px;
+}
+
+.avatar{
+    width:37px;
+
+    height:37px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    display:grid;
+
+    place-items:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #7243e6,
+            #46228e
+        );
+
+    font-size:11px;
+
+    font-weight:800;
+}
+
+.sidebar-user strong,
+.sidebar-user span{
+    display:block;
+}
+
+.sidebar-user strong{
+    font-size:10px;
+}
+
+.sidebar-user span{
+    color:var(--muted);
+
+    margin-top:3px;
+
+    font-size:8px;
+}
+
+.logout{
+    margin-top:9px;
+
+    width:100%;
+
+    padding:9px;
+
+    border:0;
+
+    background:transparent;
+
+    color:white;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    border-radius:7px;
+}
+
+.logout:hover{
+    background:
+        rgba(
+            235,
+            69,
+            83,
+            .08
+        );
+}
+
+/* =============================
+   MAIN DASHBOARD
+============================= */
+
+.main{
+    min-width:0;
+
+    padding:
+        25px
+        29px
+        35px;
+}
+
+/* =============================
+   HEADER
+============================= */
+
+.header{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:20px;
+}
+
+.header h1{
+    margin:0;
+
+    font-size:24px;
+
+    letter-spacing:-.5px;
+}
+
+.header p{
+    margin:5px 0 0;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+.header-right{
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+}
+
+.notification-button{
+    width:37px;
+
+    height:37px;
+
+    border:0;
+
+    background:transparent;
+
+    color:white;
+
+    cursor:pointer;
+
+    position:relative;
+}
+
+.notification-button svg{
+    width:18px;
+}
+
+.notification-number{
+    position:absolute;
+
+    right:-2px;
+
+    top:-3px;
+
+    width:17px;
+
+    height:17px;
+
+    border-radius:50%;
+
+    display:grid;
+
+    place-items:center;
+
+    background:var(--purple);
+
+    color:white;
+
+    font-size:8px;
+}
+
+.header-profile{
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    cursor:pointer;
+}
+
+.header-profile strong,
+.header-profile span{
+    display:block;
+}
+
+.header-profile strong{
+    font-size:10px;
+}
+
+.header-profile span{
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:8px;
+}
+
+/* =============================
+   GENERAL CARDS
+============================= */
+
+.card{
+    padding:15px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:11px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #121d2c,
+            #0e1927
+        );
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,0,0,.12);
+}
+
+.top-grid{
+    display:grid;
+
+    grid-template-columns:
+        1.1fr
+        1fr
+        1fr;
+
+    gap:12px;
+}
+
+.card-heading{
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+}
+
+.card-heading strong{
+    font-size:11px;
+}
+
+.icon{
+    width:37px;
+
+    height:37px;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:9px;
+}
+
+.icon svg{
+    width:18px;
+}
+
+.purple{
+    background:
+        linear-gradient(
+            145deg,
+            #7949ed,
+            #5625c3
+        );
+}
+
+.green{
+    background:
+        linear-gradient(
+            145deg,
+            #43d8a4,
+            #198c61
+        );
+}
+
+.orange{
+    background:
+        linear-gradient(
+            145deg,
+            #ffc056,
+            #d97d04
+        );
+}
+
+.red{
+    background:
+        linear-gradient(
+            145deg,
+            #f45f68,
+            #c22a3a
+        );
+}
+
+.blue{
+    background:
+        linear-gradient(
+            145deg,
+            #54acf1,
+            #1972be
+        );
+}
+
+/* =============================
+   NEXT SHIFT
+============================= */
+
+.next-shift h2{
+    margin:14px 0 5px;
+
+    font-size:22px;
+}
+
+.next-shift p{
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+/* =============================
+   BUTTONS
+============================= */
+
+.primary-button{
+    border:0;
+
+    margin-top:16px;
+
+    padding:8px 11px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    color:white;
+
+    font-size:9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7139eb,
+            #5323bd
+        );
+}
+
+.outline-button{
+    border:
+        1px solid #34475c;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .01
+        );
+
+    color:white;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    padding:7px 9px;
+
+    font-size:8px;
+}
+
+.outline-button:hover{
+    background:#182435;
+}
+
+/* =============================
+   EARNINGS
+============================= */
+
+.earnings-content{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.earnings h2{
+    margin:13px 0 3px;
+
+    font-size:27px;
+}
+
+.earnings p{
+    margin:0 0 11px;
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+.progress{
+    width:82px;
+
+    height:82px;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:50%;
+
+    position:relative;
+
+    background:
+        conic-gradient(
+            #3fce92 75%,
+            #29384a 0
+        );
+}
+
+.progress::after{
+    content:"";
+
+    position:absolute;
+
+    width:64px;
+
+    height:64px;
+
+    border-radius:50%;
+
+    background:#111b2a;
+}
+
+.progress strong{
+    position:relative;
+
+    z-index:2;
+
+    font-size:16px;
+}
+
+/* =============================
+   MANAGER UPDATE
+============================= */
+
+.manager-update{
+    margin:15px 0 12px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:11px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:7px;
+
+    font-size:9px;
+}
+
+.yellow-dot{
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:#ffad18;
+}
+
+/* =============================
+   QUICK ACTIONS
+============================= */
+
+.quick-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:12px;
+
+    margin:12px 0;
+}
+
+.quick-card{
+    border:
+        1px solid var(--border);
+
+    border-radius:9px;
+
+    background:#111c2a;
+
+    color:white;
+
+    padding:10px;
+
+    cursor:pointer;
+
+    display:grid;
+
+    grid-template-columns:
+        auto
+        1fr
+        auto;
+
+    align-items:center;
+
+    gap:9px;
+
+    text-align:left;
+
+    transition:.2s;
+}
+
+.quick-card:hover{
+    transform:translateY(-2px);
+
+    border-color:#445a75;
+}
+
+.quick-card strong,
+.quick-card small{
+    display:block;
+}
+
+.quick-card strong{
+    font-size:10px;
+}
+
+.quick-card small{
+    color:var(--muted);
+
+    font-size:8px;
+
+    margin-top:3px;
+}
+
+/* =============================
+   LOWER CONTENT
+============================= */
+
+.lower-grid{
+    display:grid;
+
+    grid-template-columns:
+        1.35fr
+        .82fr
+        .78fr;
+
+    gap:12px;
+}
+
+.section-header{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:8px;
+}
+
+.section-header h3{
+    margin:0;
+
+    font-size:13px;
+}
+
+/* =============================
+   SCHEDULE
+============================= */
+
+.shift-row{
+    padding:8px 0;
+
+    display:grid;
+
+    grid-template-columns:
+        58px
+        1fr
+        auto;
+
+    gap:9px;
+
+    align-items:center;
+
+    border-top:
+        1px solid var(--border);
+}
+
+.shift-row:first-of-type{
+    border-top:0;
+}
+
+.shift-date strong,
+.shift-date span,
+.shift-time strong,
+.shift-time span{
+    display:block;
+}
+
+.shift-date strong{
+    font-size:8px;
+}
+
+.shift-date span{
+    color:var(--muted);
+
+    margin-top:2px;
+
+    font-size:7px;
+}
+
+.shift-time{
+    padding-left:9px;
+
+    border-left:
+        3px solid var(--purple);
+}
+
+.shift-time strong{
+    font-size:9px;
+}
+
+.shift-time span{
+    margin-top:2px;
+
+    color:var(--muted);
+
+    font-size:7px;
+}
+
+.status{
+    padding:4px 6px;
+
+    border-radius:5px;
+
+    font-size:7px;
+
+    color:#ab91ff;
+
+    background:#251a48;
+
+    border:
+        1px solid #553d99;
+}
+
+.day-off{
+    color:#aab4c1;
+
+    background:#1c2938;
+
+    border-color:#34475b;
+}
+
+/* =============================
+   SHIFT SUMMARY
+============================= */
+
+.middle{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+}
+
+.summary-row{
+    padding:11px 0;
+
+    display:grid;
+
+    grid-template-columns:
+        auto
+        1fr
+        auto;
+
+    gap:9px;
+
+    align-items:center;
+
+    border-top:
+        1px solid var(--border);
+}
+
+.summary-row:first-of-type{
+    margin-top:9px;
+}
+
+.round-icon{
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    display:grid;
+
+    place-items:center;
+}
+
+.summary-row strong,
+.summary-row span{
+    display:block;
+}
+
+.summary-row strong{
+    font-size:9px;
+}
+
+.summary-row span{
+    margin-top:2px;
+
+    color:var(--muted);
+
+    font-size:7px;
+}
+
+/* =============================
+   NOTIFICATIONS
+============================= */
+
+.notification-row{
+    padding:8px 0;
+
+    display:grid;
+
+    grid-template-columns:
+        auto
+        1fr
+        auto;
+
+    gap:7px;
+
+    border-top:
+        1px solid var(--border);
+
+    font-size:8px;
+}
+
+.notification-row:first-of-type{
+    border-top:0;
+}
+
+.dot{
+    width:7px;
+
+    height:7px;
+
+    margin-top:2px;
+
+    border-radius:50%;
+}
+
+.dot-purple{
+    background:var(--purple);
+}
+
+.dot-orange{
+    background:var(--orange);
+}
+
+.dot-green{
+    background:var(--green);
+}
+
+.notification-row time{
+    color:var(--muted);
+
+    font-size:7px;
+}
+
+/* =============================
+   REQUESTS
+============================= */
+
+.tabs{
+    display:flex;
+
+    gap:7px;
+
+    margin-bottom:6px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.tabs button{
+    padding:6px;
+
+    border:0;
+
+    border-bottom:
+        2px solid transparent;
+
+    color:var(--muted);
+
+    background:transparent;
+
+    font-size:8px;
+
+    cursor:pointer;
+}
+
+.tabs button.active{
+    color:white;
+
+    border-bottom-color:
+        var(--purple);
+}
+
+.request-row{
+    display:grid;
+
+    grid-template-columns:
+        auto
+        1fr
+        auto;
+
+    gap:7px;
+
+    align-items:start;
+
+    padding:8px 0;
+
+    border-top:
+        1px solid var(--border);
+}
+
+.request-row strong,
+.request-row small{
+    display:block;
+}
+
+.request-row strong{
+    font-size:8px;
+}
+
+.request-row small{
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:7px;
+}
+
+.pending{
+    color:#ffb531;
+
+    background:#292216;
+
+    border:
+        1px solid #584618;
+}
+
+.approved{
+    color:#3fd49c;
+
+    background:#122820;
+
+    border:
+        1px solid #1c5a42;
+}
+
+/* =============================
+   MODAL
+============================= */
+
+.modal-overlay{
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:100;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        rgba(
+            2,
+            7,
+            14,
+            .76
+        );
+
+    backdrop-filter:
+        blur(8px);
+}
+
+.modal-overlay.open{
+    display:flex;
+}
+
+.modal{
+    width:min(
+        540px,
+        100%
+    );
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    border:
+        1px solid #31435a;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            155deg,
+            #121d2d,
+            #0c1725
+        );
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.45);
+}
+
+.modal-header{
+    padding:14px 15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.modal-header h2{
+    margin:0;
+
+    font-size:15px;
+}
+
+.close{
+    border:0;
+
+    background:transparent;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:21px;
+}
+
+.modal-body{
+    padding:15px;
+}
+
+/* =============================
+   FORMS
+============================= */
+
+.form-grid{
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap:11px;
+}
+
+.field{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+}
+
+.full{
+    grid-column:
+        1/-1;
+}
+
+.field label{
+    color:#cbd3de;
+
+    font-size:8px;
+}
+
+.field input,
+.field textarea,
+.field select{
+    width:100%;
+
+    border:
+        1px solid #2c3e54;
+
+    border-radius:6px;
+
+    background:#101b2a;
+
+    color:white;
+
+    padding:9px;
+
+    font-size:9px;
+}
+
+.field textarea{
+    min-height:85px;
+
+    resize:vertical;
+}
+
+.form-actions{
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:7px;
+
+    margin-top:12px;
+}
+
+.form-actions button{
+    border-radius:5px;
+
+    padding:8px 10px;
+
+    font-size:8px;
+
+    cursor:pointer;
+}
+
+.cancel{
+    background:#152131;
+
+    color:white;
+
+    border:
+        1px solid #33465c;
+}
+
+.submit-purple{
+    border:0;
+
+    color:white;
+
+    background:var(--purple);
+}
+
+.submit-green{
+    border:0;
+
+    color:white;
+
+    background:#1f9f6e;
+}
+
+.submit-red{
+    border:0;
+
+    color:white;
+
+    background:#d13949;
+}
+
+/* =============================
+   MODAL LISTS
+============================= */
+
+.detail{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:10px 0;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.detail span{
+    color:var(--muted);
+
+    font-size:8px;
+}
+
+.detail strong{
+    text-align:right;
+
+    font-size:8px;
+}
+
+/* =============================
+   CALENDAR
+============================= */
+
+.calendar{
+    display:grid;
+
+    grid-template-columns:
+        repeat(7,1fr);
+
+    gap:6px;
+
+    text-align:center;
+}
+
+.calendar div{
+    min-height:45px;
+
+    padding:6px;
+
+    border-radius:6px;
+
+    border:
+        1px solid var(--border);
+
+    font-size:8px;
+}
+
+/* =============================
+   TOAST
+============================= */
+
+.toast{
+    position:fixed;
+
+    right:18px;
+
+    bottom:18px;
+
+    z-index:150;
+
+    display:none;
+
+    padding:11px 13px;
+
+    border:
+        1px solid
+        rgba(
+            46,
+            197,
+            140,
+            .4
+        );
+
+    border-radius:8px;
+
+    background:#111c2b;
+
+    color:#49dca6;
+
+    font-size:9px;
+}
+
+.toast.show{
+    display:block;
+}
+
+/* =============================
+   RESPONSIVE
+============================= */
+
+@media(max-width:1100px){
+
+    .top-grid{
+        grid-template-columns:
+            1fr
+            1fr;
     }
 
-    /* CRITICAL MOBILE RESETS */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    .manager{
+        grid-column:
+            1/-1;
     }
 
-    html, body {
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    .lower-grid{
+        grid-template-columns:
+            1fr
+            1fr;
     }
 
-    body {
-      display: flex;
-      min-height: 100vh;
+    .requests{
+        grid-column:
+            1/-1;
+    }
+}
+
+@media(max-width:850px){
+
+    .app{
+        grid-template-columns:
+            1fr;
     }
 
-    /* SIDEBAR (Desktop) */
-    .sidebar {
-      width: 240px;
-      background-color: var(--bg-sidebar);
-      padding: 24px 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border-right: 1px solid var(--border-color);
-      flex-shrink: 0;
+    .sidebar{
+        display:none;
+    }
+}
+
+@media(max-width:650px){
+
+    .main{
+        padding:
+            15px
+            12px;
     }
 
-    .brand-icon {
-      width: 42px;
-      height: 42px;
-      background: var(--accent-purple);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 32px;
+    .top-grid,
+    .quick-grid,
+    .lower-grid{
+        grid-template-columns:
+            1fr;
     }
 
-    .nav-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    .manager,
+    .requests{
+        grid-column:auto;
     }
 
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      border-radius: 10px;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
+    .form-grid{
+        grid-template-columns:
+            1fr;
     }
 
-    .nav-item.active {
-      background: var(--accent-purple);
-      color: #fff;
+    .full{
+        grid-column:auto;
     }
 
-    .badge {
-      background: var(--accent-purple);
-      color: #fff;
-      font-size: 11px;
-      padding: 2px 7px;
-      border-radius: 10px;
-      margin-left: auto;
+    .header-profile div:not(.avatar){
+        display:none;
     }
+}
 
-    .sidebar-footer {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .info-card {
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 10px;
-      padding: 12px;
-      font-size: 12px;
-      color: var(--text-muted);
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    /* MAIN CONTAINER */
-    .main-content {
-      flex: 1;
-      padding: 28px 40px;
-      width: 100%;
-      max-width: 100%;
-      box-sizing: border-box;
-      overflow-x: hidden;
-    }
-
-    .header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-
-    .profile-widget {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .notification-btn {
-      position: relative;
-      background: var(--bg-card);
-      border: none;
-      padding: 10px;
-      border-radius: 50%;
-      color: var(--text-main);
-      cursor: pointer;
-    }
-
-    .notif-badge {
-      position: absolute;
-      top: -2px;
-      right: -2px;
-      background: var(--accent-purple);
-      font-size: 10px;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .user-profile {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 12px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    .avatar {
-      width: 38px;
-      height: 38px;
-      background: var(--bg-pill);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      font-size: 13px;
-    }
-
-    .user-info {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .user-info .name {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .user-info .role {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .greeting h1 {
-      font-size: 26px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .greeting p {
-      color: var(--text-muted);
-      font-size: 14px;
-      margin-bottom: 24px;
-    }
-
-    /* DESKTOP GRIDS */
-    .grid-top {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
-      width: 100%;
-    }
-
-    .grid-actions {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 24px;
-      width: 100%;
-    }
-
-    .grid-bottom {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 16px;
-      width: 100%;
-    }
-
-    .card {
-      background-color: var(--bg-card);
-      border-radius: 14px;
-      padding: 20px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .card-title {
-      font-size: 14px;
-      font-weight: 500;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .icon-box {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .btn-primary {
-      background: var(--accent-purple);
-      color: #fff;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .btn-secondary {
-      background: var(--bg-pill);
-      color: #fff;
-      border: 1px solid var(--border-color);
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    .action-card {
-      background: var(--bg-card);
-      border-radius: 12px;
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .action-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .action-text div:first-child {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .action-text div:last-child {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .progress-container {
-      position: relative;
-      width: 70px;
-      height: 70px;
-      flex-shrink: 0;
-    }
-
-    .progress-container svg {
-      width: 100%;
-      height: 100%;
-      transform: rotate(-90deg);
-    }
-
-    .progress-container circle {
-      fill: none;
-      stroke-width: 6;
-      stroke-linecap: round;
-    }
-
-    .circle-bg { stroke: var(--bg-pill); }
-    .circle-val {
-      stroke: var(--accent-teal);
-      stroke-dasharray: 175;
-      stroke-dashoffset: 44;
-    }
-
-    .progress-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .table-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .schedule-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 12px;
-    }
-
-    .status-pill {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 6px;
-      background: var(--bg-pill);
-      color: var(--text-muted);
-    }
-
-    .status-pill.upcoming {
-      background: rgba(108, 92, 231, 0.2);
-      color: var(--accent-purple);
-    }
-
-    .summary-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 0;
-    }
-
-    .summary-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .summary-val {
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      box-sizing: border-box;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      width: 400px;
-      max-width: 100%;
-      padding: 24px;
-      box-sizing: border-box;
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .modal-close {
-      font-size: 20px;
-      cursor: pointer;
-      color: var(--text-muted);
-    }
-
-    .modal-body {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .modal-footer {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    /* HARD RESPONSIVE BREAKPOINT FOR MOBILE */
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column !important;
-        width: 100vw !important;
-        overflow-x: hidden !important;
-      }
-
-      .sidebar {
-        width: 100% !important;
-        max-width: 100vw !important;
-        border-right: none !important;
-        border-bottom: 1px solid var(--border-color) !important;
-        padding: 12px !important;
-        box-sizing: border-box !important;
-      }
-
-      .brand-icon {
-        margin-bottom: 0 !important;
-      }
-
-      .nav-list {
-        display: none !important; /* Hides desktop navigation menu on small screens to save space */
-      }
-
-      .sidebar-footer {
-        display: none !important;
-      }
-
-      .main-content {
-        padding: 14px !important;
-        width: 100% !important;
-        max-width: 100vw !important;
-        box-sizing: border-box !important;
-      }
-
-      .grid-top,
-      .grid-actions,
-      .grid-bottom {
-        grid-template-columns: 1fr !important;
-        width: 100% !important;
-      }
-
-      .schedule-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-      }
-
-      .schedule-row > div {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-      }
-    }
-  </style>
+</style>
 </head>
+
 <body>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-      <div class="brand-icon">
-        <i data-feather="users" style="color: white;"></i>
-      </div>
-      <div style="font-weight: 600; font-size: 14px; color: #fff;">Dashboard</div>
-    </div>
+<div class="app">
 
-    <ul class="nav-list">
-      <li><a href="#" class="nav-item active" data-page="Dashboard"><i data-feather="grid"></i> Dashboard</a></li>
-      <li><a href="#" class="nav-item" data-page="My Shifts"><i data-feather="calendar"></i> My Shifts</a></li>
-      <li><a href="#" class="nav-item" data-page="Calendar"><i data-feather="clock"></i> Calendar</a></li>
-      <li><a href="#" class="nav-item" data-page="Requests"><i data-feather="repeat"></i> Requests</a></li>
-      <li>
-        <a href="#" class="nav-item" data-page="Notifications">
-          <i data-feather="bell"></i> Notifications
-          <span class="badge" id="notif-count">2</span>
-        </a>
-      </li>
-      <li><a href="#" class="nav-item" data-page="Profile"><i data-feather="user"></i> Profile</a></li>
-    </ul>
+<!-- =========================
+     SIDEBAR
+========================= -->
 
-    <div class="sidebar-footer">
-      <div class="info-card">
-        <i data-feather="clock"></i>
-        <div>
-          <div>Local time</div>
-          <strong style="color: #fff; font-size: 11px;" id="live-clock">Mon, 03 Aug 2026<br/>08:15 AM</strong>
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            <i data-lucide="calendar-clock"></i>
         </div>
-      </div>
-    </div>
-  </aside>
 
-  <!-- MAIN CONTENT -->
-  <main class="main-content">
-    <div class="header-bar">
-      <div></div>
-      <div class="profile-widget">
-        <button class="notification-btn" id="header-notif-btn">
-          <i data-feather="bell" style="width: 16px; height: 16px;"></i>
-          <span class="notif-badge" id="header-notif-badge">2</span>
+        <div>
+            <h2>Shifty</h2>
+            <p>Staff Dashboard</p>
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <button
+        class="nav-item active">
+            <i data-lucide="layout-dashboard"></i>
+            Dashboard
         </button>
-        <div class="user-profile" id="user-menu-btn">
-          <div class="avatar" id="avatar-initials">--</div>
-          <div class="user-info">
-            <span class="name" id="user-fullname"></span>
-            <span class="role" id="user-role"></span>
-          </div>
-          <i data-feather="chevron-down" style="width: 14px; color: var(--text-muted);"></i>
-        </div>
-      </div>
-    </div>
 
-    <section class="greeting">
-      <h1>Good morning, <span id="user-firstname"></span> 👋</h1>
-      <p>Here's what's happening today.</p>
-    </section>
-
-    <!-- TOP GRID -->
-    <div class="grid-top">
-      <div class="card">
-        <div class="card-title">
-          <div class="icon-box" style="background: rgba(108, 92, 231, 0.2); color: var(--accent-purple);">
-            <i data-feather="calendar"></i>
-          </div>
-          Your next shift
-        </div>
-        <div style="margin: 16px 0;">
-          <h2 style="font-size: 18px; font-weight: 600;">Today, 9:00 AM – 5:00 PM</h2>
-          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Front of House • Shift</p>
-        </div>
-        <button class="btn-primary" id="btn-shift-details">View shift details <i data-feather="chevron-right" style="width: 14px;"></i></button>
-      </div>
-
-      <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
-        <div>
-          <div class="card-title" style="margin-bottom: 12px;">
-            <div class="icon-box" style="background: rgba(0, 206, 201, 0.2); color: var(--accent-teal);">
-              <i data-feather="shopping-bag"></i>
-            </div>
-            Weekly earnings
-          </div>
-          <h2 style="font-size: 24px; font-weight: 700;">£184.50</h2>
-          <p style="font-size: 11px; color: var(--text-muted); margin: 4px 0 14px 0;">75% of £246.00 goal</p>
-          <button class="btn-secondary" id="btn-payslip"><i data-feather="file-text" style="width: 12px;"></i> View payslip</button>
-        </div>
-        <div class="progress-container">
-          <svg viewBox="0 0 64 64">
-            <circle class="circle-bg" cx="32" cy="32" r="28" />
-            <circle class="circle-val" cx="32" cy="32" r="28" />
-          </svg>
-          <span class="progress-text">75%</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title" style="margin-bottom: 12px;">
-          <div class="icon-box" style="background: rgba(253, 203, 110, 0.2); color: var(--accent-yellow);">
-            <i data-feather="volume-2"></i>
-          </div>
-          Manager Updates
-        </div>
-        <div style="background: var(--bg-pill); padding: 12px; border-radius: 8px; font-size: 12px; margin-bottom: 12px;">
-          Team meeting on Friday at 4 PM
-        </div>
-        <button class="btn-secondary" id="btn-all-updates">View all updates</button>
-      </div>
-    </div>
-
-    <!-- ACTIONS GRID -->
-    <div class="grid-actions">
-      <div class="action-card" id="action-time-off">
-        <div class="action-left">
-          <div class="icon-box" style="background: rgba(108, 92, 231, 0.2); color: var(--accent-purple);"><i data-feather="edit-3"></i></div>
-          <div class="action-text">
-            <div>Request Time Off</div>
-            <div>Request days off</div>
-          </div>
-        </div>
-        <i data-feather="chevron-right" style="color: var(--text-muted); width: 16px;"></i>
-      </div>
-
-      <div class="action-card" id="action-swap-shift">
-        <div class="action-left">
-          <div class="icon-box" style="background: rgba(0, 206, 201, 0.2); color: var(--accent-teal);"><i data-feather="refresh-cw"></i></div>
-          <div class="action-text">
-            <div>Swap Shift</div>
-            <div>Find a shift to swap</div>
-          </div>
-        </div>
-        <i data-feather="chevron-right" style="color: var(--text-muted); width: 16px;"></i>
-      </div>
-
-      <div class="action-card" id="action-drop-shift">
-        <div class="action-left">
-          <div class="icon-box" style="background: rgba(255, 118, 117, 0.2); color: var(--accent-pink);"><i data-feather="trash-2"></i></div>
-          <div class="action-text">
-            <div>Drop Shift</div>
-            <div>Give up a shift</div>
-          </div>
-        </div>
-        <i data-feather="chevron-right" style="color: var(--text-muted); width: 16px;"></i>
-      </div>
-
-      <div class="action-card" id="action-view-payslip">
-        <div class="action-left">
-          <div class="icon-box" style="background: rgba(9, 132, 227, 0.2); color: #0984e3;"><i data-feather="file-text"></i></div>
-          <div class="action-text">
-            <div>View Payslip</div>
-            <div>See your payslips</div>
-          </div>
-        </div>
-        <i data-feather="chevron-right" style="color: var(--text-muted); width: 16px;"></i>
-      </div>
-    </div>
-
-    <!-- BOTTOM GRID -->
-    <div class="grid-bottom">
-      <div class="card">
-        <div class="table-header">
-          <div class="card-title">
-            <div class="icon-box" style="background: rgba(108, 92, 231, 0.2); color: var(--accent-purple);"><i data-feather="calendar"></i></div>
+        <button
+        class="nav-item"
+        onclick="openMyShifts()">
+            <i data-lucide="calendar-days"></i>
             My Schedule
-          </div>
-        </div>
+        </button>
 
-        <div class="schedule-row">
-          <div><strong style="color: #fff;">Mon 03 Aug</strong></div>
-          <div>9:00 AM – 5:00 PM</div>
-          <div><span class="status-pill upcoming">Upcoming</span></div>
-        </div>
+        <button
+        class="nav-item"
+        onclick="openCalendar()">
+            <i data-lucide="calendar"></i>
+            Calendar
+        </button>
 
-        <div class="schedule-row">
-          <div><span style="color: var(--text-muted);">Wed 05 Aug</span></div>
-          <div>2:00 PM – 10:00 PM</div>
-          <div><span class="status-pill">Scheduled</span></div>
-        </div>
-      </div>
+        <button
+        class="nav-item"
+        onclick="openRequests()">
+            <i data-lucide="repeat-2"></i>
+            Requests
 
-      <div class="card">
-        <div class="card-title" style="margin-bottom: 16px;">
-          <div class="icon-box" style="background: rgba(108, 92, 231, 0.2); color: var(--accent-purple);"><i data-feather="bar-chart-2"></i></div>
-          Shift Summary
-        </div>
+            <span class="badge">
+                3
+            </span>
+        </button>
 
-        <div class="summary-item">
-          <div class="summary-left">
-            <div>
-              <div style="font-size: 12px; font-weight: 600;">Hours worked</div>
+        <button
+        class="nav-item"
+        onclick="openTimeOff()">
+            <i data-lucide="calendar-minus"></i>
+            Time Off
+        </button>
+
+        <button
+        class="nav-item"
+        onclick="openSwap()">
+            <i data-lucide="arrow-left-right"></i>
+            Swap Shift
+        </button>
+
+        <button
+        class="nav-item"
+        onclick="openDrop()">
+            <i data-lucide="trash-2"></i>
+            Drop Shift
+        </button>
+
+        <button
+        class="nav-item"
+        onclick="openPayslip()">
+            <i data-lucide="receipt-text"></i>
+            Payslip
+        </button>
+
+        <button
+        class="nav-item"
+        onclick="openNotifications()">
+            <i data-lucide="bell"></i>
+            Notifications
+
+            <span class="badge">
+                3
+            </span>
+        </button>
+
+        <button
+        class="nav-item"
+        onclick="openProfile()">
+            <i data-lucide="circle-user-round"></i>
+            Profile
+        </button>
+
+        <button
+        class="nav-item"
+        onclick="openSettings()">
+            <i data-lucide="settings"></i>
+            Settings
+        </button>
+
+        <button
+        class="nav-item"
+        onclick="openHelp()">
+            <i data-lucide="circle-help"></i>
+            Help & Support
+        </button>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div
+        class="sidebar-user"
+        onclick="openProfile()">
+
+            <div
+            class="avatar"
+            id="sidebarAvatar">
+                ST
             </div>
-          </div>
-          <div class="summary-val">24.5 hrs</div>
+
+            <div>
+
+                <strong id="sidebarName">
+                    Staff Member
+                </strong>
+
+                <span id="sidebarRole">
+                    Team Member
+                </span>
+
+            </div>
+
         </div>
-      </div>
+
+
+        <button
+        class="logout"
+        onclick="logout()">
+
+            <i data-lucide="log-out"></i>
+
+            Logout
+
+        </button>
+
     </div>
-  </main>
 
-  <!-- MODAL SYSTEM -->
-  <div class="modal-overlay" id="app-modal">
-    <div class="modal-box">
-      <div class="modal-header">
-        <h3 id="modal-title">Notification</h3>
-        <span class="modal-close" id="modal-close-btn">&times;</span>
-      </div>
-      <div class="modal-body" id="modal-body"></div>
-      <div class="modal-footer">
-        <button class="btn-primary" id="modal-action-btn">Confirm</button>
-      </div>
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div>
+
+        <h1>
+            <span id="greeting">
+                Good morning
+            </span>,
+
+            <span id="firstName">
+                Staff
+            </span>! 👋
+        </h1>
+
+        <p>
+            Here's what's happening today.
+        </p>
+
     </div>
-  </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      if (typeof feather !== "undefined") {
-        feather.replace();
-      }
 
-      // Read real user data from localStorage dynamically
-      const storedUser = JSON.parse(localStorage.getItem("user")) || 
-                         JSON.parse(localStorage.getItem("currentUser")) || 
-                         JSON.parse(localStorage.getItem("signedInUser"));
+    <div class="header-right">
 
-      let firstName = "";
-      let fullName = "";
-      let role = "Team Member";
+        <button
+        class="notification-button"
+        onclick="openNotifications()">
 
-      if (storedUser) {
-        if (storedUser.firstName) {
-          firstName = storedUser.firstName;
-          fullName = `${storedUser.firstName} ${storedUser.lastName || ""}`.trim();
-        } else if (storedUser.name || storedUser.fullName) {
-          fullName = storedUser.name || storedUser.fullName;
-          firstName = fullName.split(" ")[0];
+            <i data-lucide="bell"></i>
+
+            <span class="notification-number">
+                3
+            </span>
+
+        </button>
+
+
+        <div
+        class="header-profile"
+        onclick="openProfile()">
+
+            <div
+            class="avatar"
+            id="headerAvatar">
+                ST
+            </div>
+
+            <div>
+
+                <strong id="headerName">
+                    Staff Member
+                </strong>
+
+                <span id="headerRole">
+                    Team Member
+                </span>
+
+            </div>
+
+            <i data-lucide="chevron-down"></i>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     TOP CARDS
+========================= -->
+
+<section class="top-grid">
+
+<!-- NEXT SHIFT -->
+
+<article class="card next-shift">
+
+    <div class="card-heading">
+
+        <div class="icon purple">
+            <i data-lucide="calendar-days"></i>
+        </div>
+
+        <strong>
+            Your next shift
+        </strong>
+
+    </div>
+
+
+    <h2>
+        Today, 9:00 AM – 5:00 PM
+    </h2>
+
+
+    <p>
+        Front of House • Main Branch
+    </p>
+
+
+    <button
+    class="primary-button"
+    onclick="openShiftDetails()">
+
+        View shift details →
+
+    </button>
+
+</article>
+
+
+<!-- EARNINGS -->
+
+<article class="card earnings">
+
+    <div class="card-heading">
+
+        <div class="icon green">
+            <i data-lucide="wallet-cards"></i>
+        </div>
+
+        <strong>
+            Weekly earnings
+        </strong>
+
+    </div>
+
+
+    <div class="earnings-content">
+
+        <div>
+
+            <h2>
+                £184.50
+            </h2>
+
+            <p>
+                75% of £246.00 goal
+            </p>
+
+            <button
+            class="outline-button"
+            onclick="openPayslip()">
+
+                View payslip
+
+            </button>
+
+        </div>
+
+
+        <div class="progress">
+            <strong>
+                75%
+            </strong>
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- MANAGER UPDATE -->
+
+<article class="card manager">
+
+    <div class="card-heading">
+
+        <div class="icon orange">
+            <i data-lucide="megaphone"></i>
+        </div>
+
+        <strong>
+            Manager Updates
+        </strong>
+
+    </div>
+
+
+    <div class="manager-update">
+
+        <span class="yellow-dot"></span>
+
+        Team meeting on Friday at 4 PM
+
+    </div>
+
+
+    <button
+    class="outline-button"
+    onclick="openManagerUpdates()">
+
+        View all updates
+
+    </button>
+
+</article>
+
+</section>
+
+
+<!-- =========================
+     QUICK ACTIONS
+========================= -->
+
+<section class="quick-grid">
+
+<button
+class="quick-card"
+onclick="openTimeOff()">
+
+    <div class="icon purple">
+        <i data-lucide="calendar-minus"></i>
+    </div>
+
+    <div>
+        <strong>
+            Request Time Off
+        </strong>
+
+        <small>
+            Request days off
+        </small>
+    </div>
+
+    <span>›</span>
+
+</button>
+
+
+<button
+class="quick-card"
+onclick="openSwap()">
+
+    <div class="icon green">
+        <i data-lucide="arrow-left-right"></i>
+    </div>
+
+    <div>
+        <strong>
+            Swap Shift
+        </strong>
+
+        <small>
+            Find a shift to swap
+        </small>
+    </div>
+
+    <span>›</span>
+
+</button>
+
+
+<button
+class="quick-card"
+onclick="openDrop()">
+
+    <div class="icon red">
+        <i data-lucide="trash-2"></i>
+    </div>
+
+    <div>
+        <strong>
+            Drop Shift
+        </strong>
+
+        <small>
+            Give up a shift
+        </small>
+    </div>
+
+    <span>›</span>
+
+</button>
+
+
+<button
+class="quick-card"
+onclick="openPayslip()">
+
+    <div class="icon blue">
+        <i data-lucide="file-text"></i>
+    </div>
+
+    <div>
+        <strong>
+            View Payslip
+        </strong>
+
+        <small>
+            See your payslips
+        </small>
+    </div>
+
+    <span>›</span>
+
+</button>
+
+</section>
+
+
+<!-- =========================
+     LOWER DASHBOARD
+========================= -->
+
+<section class="lower-grid">
+
+<!-- MY SCHEDULE -->
+
+<article class="card">
+
+<div class="section-header">
+
+    <h3>
+        📅 My Schedule
+    </h3>
+
+    <button
+    class="outline-button"
+    onclick="openCalendar()">
+
+        View full calendar
+
+    </button>
+
+</div>
+
+
+<div class="shift-row">
+
+    <div class="shift-date">
+        <strong>Mon</strong>
+        <span>12 Aug</span>
+    </div>
+
+    <div class="shift-time">
+        <strong>
+            9:00 AM – 5:00 PM
+        </strong>
+
+        <span>
+            Front of House • Main Branch
+        </span>
+    </div>
+
+    <span class="status">
+        Upcoming
+    </span>
+
+</div>
+
+
+<div class="shift-row">
+
+    <div class="shift-date">
+        <strong>Tue</strong>
+        <span>13 Aug</span>
+    </div>
+
+    <div class="shift-time">
+        <strong>
+            2:00 PM – 10:00 PM
+        </strong>
+
+        <span>
+            Front of House • Main Branch
+        </span>
+    </div>
+
+    <span class="status">
+        Upcoming
+    </span>
+
+</div>
+
+
+<div class="shift-row">
+
+    <div class="shift-date">
+        <strong>Wed</strong>
+        <span>14 Aug</span>
+    </div>
+
+    <div class="shift-time">
+        <strong>
+            9:00 AM – 5:00 PM
+        </strong>
+
+        <span>
+            Front of House • Main Branch
+        </span>
+    </div>
+
+    <span class="status">
+        Upcoming
+    </span>
+
+</div>
+
+
+<div class="shift-row">
+
+    <div class="shift-date">
+        <strong>Thu</strong>
+        <span>15 Aug</span>
+    </div>
+
+    <div class="shift-time">
+        <strong>
+            Day Off
+        </strong>
+    </div>
+
+    <span class="status day-off">
+        Day Off
+    </span>
+
+</div>
+
+
+<div class="shift-row">
+
+    <div class="shift-date">
+        <strong>Fri</strong>
+        <span>16 Aug</span>
+    </div>
+
+    <div class="shift-time">
+        <strong>
+            9:00 AM – 5:00 PM
+        </strong>
+
+        <span>
+            Front of House • Main Branch
+        </span>
+    </div>
+
+    <span class="status">
+        Upcoming
+    </span>
+
+</div>
+
+
+<div class="shift-row">
+
+    <div class="shift-date">
+        <strong>Sat</strong>
+        <span>17 Aug</span>
+    </div>
+
+    <div class="shift-time">
+        <strong>
+            11:00 AM – 7:00 PM
+        </strong>
+
+        <span>
+            Front of House • Main Branch
+        </span>
+    </div>
+
+    <span class="status">
+        Upcoming
+    </span>
+
+</div>
+
+
+<div class="shift-row">
+
+    <div class="shift-date">
+        <strong>Sun</strong>
+        <span>18 Aug</span>
+    </div>
+
+    <div class="shift-time">
+        <strong>
+            Day Off
+        </strong>
+    </div>
+
+    <span class="status day-off">
+        Day Off
+    </span>
+
+</div>
+
+</article>
+
+
+<!-- MIDDLE -->
+
+<div class="middle">
+
+<!-- SHIFT SUMMARY -->
+
+<article class="card">
+
+<div class="section-header">
+    <h3>
+        📊 Shift Summary
+    </h3>
+</div>
+
+
+<div class="summary-row">
+
+    <div class="round-icon purple">
+        ⏱
+    </div>
+
+    <div>
+        <strong>
+            Hours worked
+        </strong>
+
+        <span>
+            This week
+        </span>
+    </div>
+
+    <strong>
+        24.5 hrs
+    </strong>
+
+</div>
+
+
+<div class="summary-row">
+
+    <div class="round-icon green">
+        ✓
+    </div>
+
+    <div>
+        <strong>
+            Shifts completed
+        </strong>
+
+        <span>
+            This week
+        </span>
+    </div>
+
+    <strong>
+        3
+    </strong>
+
+</div>
+
+
+<div class="summary-row">
+
+    <div class="round-icon orange">
+        ⌛
+    </div>
+
+    <div>
+        <strong>
+            Shifts remaining
+        </strong>
+
+        <span>
+            This week
+        </span>
+    </div>
+
+    <strong>
+        2
+    </strong>
+
+</div>
+
+</article>
+
+
+<!-- NOTIFICATIONS -->
+
+<article class="card">
+
+<div class="section-header">
+
+    <h3>
+        Recent Notifications
+    </h3>
+
+    <button
+    class="outline-button"
+    onclick="openNotifications()">
+
+        View all
+
+    </button>
+
+</div>
+
+
+<div class="notification-row">
+
+    <span class="dot dot-purple"></span>
+
+    <span>
+        Your shift on 16 Aug has been updated
+    </span>
+
+    <time>
+        10 min ago
+    </time>
+
+</div>
+
+
+<div class="notification-row">
+
+    <span class="dot dot-orange"></span>
+
+    <span>
+        New manager announcement
+    </span>
+
+    <time>
+        1 hour ago
+    </time>
+
+</div>
+
+
+<div class="notification-row">
+
+    <span class="dot dot-green"></span>
+
+    <span>
+        Your time-off request was received
+    </span>
+
+    <time>
+        2 hours ago
+    </time>
+
+</div>
+
+</article>
+
+</div>
+
+
+<!-- REQUESTS -->
+
+<article class="card requests">
+
+<div class="section-header">
+
+    <h3>
+        Requests
+    </h3>
+
+</div>
+
+
+<div class="tabs">
+
+    <button class="active">
+        All
+    </button>
+
+    <button>
+        Time Off
+    </button>
+
+    <button>
+        Swap
+    </button>
+
+    <button>
+        Drop
+    </button>
+
+</div>
+
+
+<div class="request-row">
+
+    <span class="dot dot-orange"></span>
+
+    <div>
+
+        <strong>
+            Time Off
+        </strong>
+
+        <small>
+            15 Aug – 16 Aug
+            <br>
+            Submitted on 10 Aug
+        </small>
+
+    </div>
+
+    <span class="status pending">
+        Pending
+    </span>
+
+</div>
+
+
+<div class="request-row">
+
+    <span class="dot dot-orange"></span>
+
+    <div>
+
+        <strong>
+            Swap Shift
+        </strong>
+
+        <small>
+            18 Aug
+            <br>
+            Submitted on 11 Aug
+        </small>
+
+    </div>
+
+    <span class="status pending">
+        Pending
+    </span>
+
+</div>
+
+
+<div class="request-row">
+
+    <span class="dot dot-green"></span>
+
+    <div>
+
+        <strong>
+            Drop Shift
+        </strong>
+
+        <small>
+            21 Aug
+            <br>
+            Submitted on 12 Aug
+        </small>
+
+    </div>
+
+    <span class="status approved">
+        Approved
+    </span>
+
+</div>
+
+
+<button
+class="outline-button"
+style="
+width:100%;
+margin-top:9px;
+"
+onclick="openRequests()">
+
+    View all requests
+
+</button>
+
+</article>
+
+</section>
+
+</main>
+
+</div>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+class="modal-overlay"
+id="modalOverlay">
+
+<div class="modal">
+
+<div class="modal-header">
+
+    <h2 id="modalTitle">
+        Details
+    </h2>
+
+    <button
+    class="close"
+    onclick="closeModal()">
+
+        ×
+
+    </button>
+
+</div>
+
+<div
+class="modal-body"
+id="modalBody">
+</div>
+
+</div>
+
+</div>
+
+
+<div
+class="toast"
+id="toast">
+</div>
+
+
+<script>
+
+/* =========================================
+   LOGGED-IN EMPLOYEE DATA
+========================================= */
+
+const possibleUserKeys = [
+    "shiftlyCurrentUser",
+    "currentUser",
+    "loggedInUser",
+    "user",
+    "userData",
+    "authUser"
+];
+
+
+function getLoggedInUser(){
+
+    for(
+        const key
+        of possibleUserKeys
+    ){
+
+        const raw =
+            localStorage.getItem(key) ||
+            sessionStorage.getItem(key);
+
+
+        if(raw){
+
+            try{
+
+                const user =
+                    JSON.parse(raw);
+
+
+                if(
+                    user &&
+                    typeof user === "object"
+                ){
+
+                    return user;
+
+                }
+
+            }
+
+            catch(error){}
+
         }
-        if (storedUser.role) {
-          role = storedUser.role;
+
+    }
+
+
+    return null;
+
+}
+
+
+const storedUser =
+    getLoggedInUser();
+
+
+const employee = {
+
+    name:
+        storedUser?.name ||
+        storedUser?.fullName ||
+        "Sarah Johnson",
+
+    role:
+        storedUser?.role ||
+        "Team Member",
+
+    email:
+        storedUser?.email ||
+        "sarah.johnson@example.com",
+
+    phone:
+        storedUser?.phone ||
+        "+44 7700 900123",
+
+    employeeId:
+        storedUser?.employeeId ||
+        storedUser?.id ||
+        "EMP25847",
+
+    location:
+        storedUser?.location ||
+        storedUser?.branch ||
+        "Main Branch"
+
+};
+
+
+/* =========================================
+   EMPLOYEE PROFILE
+========================================= */
+
+function employeeInitials(){
+
+    const parts =
+        employee
+        .name
+        .trim()
+        .split(/\s+/);
+
+
+    if(
+        parts.length >= 2
+    ){
+
+        return (
+            parts[0][0] +
+            parts[
+                parts.length - 1
+            ][0]
+        )
+        .toUpperCase();
+
+    }
+
+
+    return employee
+        .name
+        .substring(
+            0,
+            2
+        )
+        .toUpperCase();
+
+}
+
+
+function loadEmployee(){
+
+    const first =
+        employee
+        .name
+        .split(" ")[0];
+
+
+    document
+        .getElementById(
+            "firstName"
+        )
+        .textContent =
+        first;
+
+
+    document
+        .getElementById(
+            "sidebarName"
+        )
+        .textContent =
+        employee.name;
+
+
+    document
+        .getElementById(
+            "headerName"
+        )
+        .textContent =
+        employee.name;
+
+
+    document
+        .getElementById(
+            "sidebarRole"
+        )
+        .textContent =
+        employee.role;
+
+
+    document
+        .getElementById(
+            "headerRole"
+        )
+        .textContent =
+        employee.role;
+
+
+    const initials =
+        employeeInitials();
+
+
+    document
+        .getElementById(
+            "sidebarAvatar"
+        )
+        .textContent =
+        initials;
+
+
+    document
+        .getElementById(
+            "headerAvatar"
+        )
+        .textContent =
+        initials;
+
+
+    const hour =
+        new Date()
+        .getHours();
+
+
+    let greeting =
+        "Good morning";
+
+
+    if(
+        hour >= 12 &&
+        hour < 18
+    ){
+
+        greeting =
+            "Good afternoon";
+
+    }
+
+
+    else if(
+        hour >= 18
+    ){
+
+        greeting =
+            "Good evening";
+
+    }
+
+
+    document
+        .getElementById(
+            "greeting"
+        )
+        .textContent =
+        greeting;
+
+}
+
+
+/* =========================================
+   MODAL SYSTEM
+========================================= */
+
+const modal =
+    document
+    .getElementById(
+        "modalOverlay"
+    );
+
+
+function openModal(
+    title,
+    content
+){
+
+    document
+        .getElementById(
+            "modalTitle"
+        )
+        .textContent =
+        title;
+
+
+    document
+        .getElementById(
+            "modalBody"
+        )
+        .innerHTML =
+        content;
+
+
+    modal
+        .classList
+        .add(
+            "open"
+        );
+
+
+    lucide
+        .createIcons();
+
+}
+
+
+function closeModal(){
+
+    modal
+        .classList
+        .remove(
+            "open"
+        );
+
+}
+
+
+modal
+.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            modal
+        ){
+
+            closeModal();
+
         }
-      }
 
-      function getInitials(name) {
-        if (!name) return "--";
-        const parts = name.trim().split(" ");
-        if (parts.length >= 2) {
-          return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+);
+
+
+/* =========================================
+   SUCCESS MESSAGE
+========================================= */
+
+function success(message){
+
+    const toast =
+        document
+        .getElementById(
+            "toast"
+        );
+
+
+    toast
+        .textContent =
+        "✓ " + message;
+
+
+    toast
+        .classList
+        .add(
+            "show"
+        );
+
+
+    setTimeout(
+        function(){
+
+            toast
+                .classList
+                .remove(
+                    "show"
+                );
+
+        },
+        3000
+    );
+
+}
+
+
+/* =========================================
+   TIME OFF
+========================================= */
+
+function openTimeOff(){
+
+openModal(
+"Request Time Off",
+
+`
+
+<form
+id="timeOffForm">
+
+<div class="form-grid">
+
+<div class="field">
+
+<label>
+Start Date
+</label>
+
+<input
+type="date"
+id="timeOffStart"
+required>
+
+</div>
+
+
+<div class="field">
+
+<label>
+End Date
+</label>
+
+<input
+type="date"
+id="timeOffEnd"
+required>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+Reason
+</label>
+
+<textarea
+id="timeOffReason"
+placeholder="Enter your reason"
+required></textarea>
+
+</div>
+
+</div>
+
+
+<div class="form-actions">
+
+<button
+type="button"
+class="cancel"
+onclick="closeModal()">
+
+Cancel
+
+</button>
+
+
+<button
+type="submit"
+class="submit-purple">
+
+Submit Request
+
+</button>
+
+</div>
+
+</form>
+
+`
+
+);
+
+
+document
+.getElementById(
+"timeOffForm"
+)
+.addEventListener(
+"submit",
+
+function(event){
+
+event.preventDefault();
+
+
+const request = {
+
+type:
+"Time Off",
+
+start:
+document
+.getElementById(
+"timeOffStart"
+)
+.value,
+
+end:
+document
+.getElementById(
+"timeOffEnd"
+)
+.value,
+
+reason:
+document
+.getElementById(
+"timeOffReason"
+)
+.value,
+
+status:
+"Pending"
+
+};
+
+
+saveRequest(
+request
+);
+
+
+closeModal();
+
+
+success(
+"Time-off request submitted successfully!"
+);
+
+}
+
+);
+
+}
+
+
+/* =========================================
+   SWAP SHIFT
+========================================= */
+
+function openSwap(){
+
+openModal(
+"Swap Shift",
+
+`
+
+<form
+id="swapForm">
+
+<div class="form-grid">
+
+<div class="field full">
+
+<label>
+My Shift
+</label>
+
+<select
+id="myShift"
+required>
+
+<option>
+Tue, 13 Aug — 2:00 PM - 10:00 PM
+</option>
+
+<option>
+Wed, 14 Aug — 9:00 AM - 5:00 PM
+</option>
+
+<option>
+Fri, 16 Aug — 9:00 AM - 5:00 PM
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+Swap With
+</label>
+
+<select
+id="swapWith"
+required>
+
+<option>
+Thu, 15 Aug — 9:00 AM - 5:00 PM
+</option>
+
+<option>
+Sat, 17 Aug — 11:00 AM - 7:00 PM
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+Reason
+</label>
+
+<textarea
+id="swapReason"
+placeholder="Why do you need to swap?"
+required></textarea>
+
+</div>
+
+</div>
+
+
+<div class="form-actions">
+
+<button
+type="button"
+class="cancel"
+onclick="closeModal()">
+
+Cancel
+
+</button>
+
+
+<button
+type="submit"
+class="submit-green">
+
+Submit Swap
+
+</button>
+
+</div>
+
+</form>
+
+`
+
+);
+
+
+document
+.getElementById(
+"swapForm"
+)
+.addEventListener(
+"submit",
+
+function(event){
+
+event.preventDefault();
+
+
+saveRequest({
+
+type:
+"Swap Shift",
+
+shift:
+document
+.getElementById(
+"myShift"
+)
+.value,
+
+swapWith:
+document
+.getElementById(
+"swapWith"
+)
+.value,
+
+reason:
+document
+.getElementById(
+"swapReason"
+)
+.value,
+
+status:
+"Pending"
+
+});
+
+
+closeModal();
+
+
+success(
+"Swap request submitted successfully!"
+);
+
+}
+
+);
+
+}
+
+
+/* =========================================
+   DROP SHIFT
+========================================= */
+
+function openDrop(){
+
+openModal(
+"Drop Shift",
+
+`
+
+<form
+id="dropForm">
+
+<div class="form-grid">
+
+<div class="field full">
+
+<label>
+Select Shift
+</label>
+
+<select
+id="dropShift"
+required>
+
+<option>
+Fri, 16 Aug — 9:00 AM - 5:00 PM
+</option>
+
+<option>
+Sat, 17 Aug — 11:00 AM - 7:00 PM
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+Reason
+</label>
+
+<textarea
+id="dropReason"
+placeholder="Why do you need to drop this shift?"
+required></textarea>
+
+</div>
+
+</div>
+
+
+<div class="form-actions">
+
+<button
+type="button"
+class="cancel"
+onclick="closeModal()">
+
+Cancel
+
+</button>
+
+
+<button
+type="submit"
+class="submit-red">
+
+Submit Drop
+
+</button>
+
+</div>
+
+</form>
+
+`
+
+);
+
+
+document
+.getElementById(
+"dropForm"
+)
+.addEventListener(
+"submit",
+
+function(event){
+
+event.preventDefault();
+
+
+saveRequest({
+
+type:
+"Drop Shift",
+
+shift:
+document
+.getElementById(
+"dropShift"
+)
+.value,
+
+reason:
+document
+.getElementById(
+"dropReason"
+)
+.value,
+
+status:
+"Pending"
+
+});
+
+
+closeModal();
+
+
+success(
+"Drop shift request submitted successfully!"
+);
+
+}
+
+);
+
+}
+
+
+/* =========================================
+   SAVE REQUEST
+========================================= */
+
+function saveRequest(request){
+
+    let requests =
+        JSON.parse(
+            localStorage
+            .getItem(
+                "staffRequests"
+            )
+        ) || [];
+
+
+    request.id =
+        Date.now();
+
+
+    request.employee =
+        employee.name;
+
+
+    request.submitted =
+        new Date()
+        .toLocaleString();
+
+
+    requests.push(
+        request
+    );
+
+
+    localStorage
+        .setItem(
+            "staffRequests",
+            JSON.stringify(
+                requests
+            )
+        );
+
+}
+
+
+/* =========================================
+   PAYSLIP
+========================================= */
+
+function openPayslip(){
+
+openModal(
+
+"Payslip",
+
+`
+
+<div class="detail">
+
+<span>
+Week
+</span>
+
+<strong>
+05 Aug – 11 Aug 2024
+</strong>
+
+</div>
+
+
+<div class="detail">
+
+<span>
+Hours Worked
+</span>
+
+<strong>
+24.5 hrs
+</strong>
+
+</div>
+
+
+<div class="detail">
+
+<span>
+Rate
+</span>
+
+<strong>
+£10.42 /hr
+</strong>
+
+</div>
+
+
+<div class="detail">
+
+<span>
+Gross Pay
+</span>
+
+<strong>
+£255.29
+</strong>
+
+</div>
+
+
+<div class="detail">
+
+<span>
+Tax
+</span>
+
+<strong>
+-£30.63
+</strong>
+
+</div>
+
+
+<div class="detail">
+
+<span>
+NI
+</span>
+
+<strong>
+-£20.16
+</strong>
+
+</div>
+
+
+<div class="detail">
+
+<span>
+Net Pay
+</span>
+
+<strong
+style="
+color:#3fd49c;
+font-size:12px;
+">
+
+£204.50
+
+</strong>
+
+</div>
+
+
+<button
+class="primary-button"
+style="
+width:100%;
+"
+onclick="downloadPayslip()">
+
+Download Payslip
+
+</button>
+
+`
+
+);
+
+}
+
+
+function downloadPayslip(){
+
+    const content =
+
+`
+SHIFTY PAYSLIP
+
+Employee:
+${employee.name}
+
+Employee ID:
+${employee.employeeId}
+
+Hours Worked:
+24.5 hrs
+
+Rate:
+£10.42 /hr
+
+Gross Pay:
+£255.29
+
+Tax:
+-£30.63
+
+NI:
+-£20.16
+
+Net Pay:
+£204.50
+`;
+
+
+    const blob =
+        new Blob(
+            [content],
+            {
+                type:
+                "text/plain"
+            }
+        );
+
+
+    const url =
+        URL
+        .createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document
+        .createElement(
+            "a"
+        );
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        "Shifty_Payslip.txt";
+
+
+    link.click();
+
+
+    URL
+        .revokeObjectURL(
+            url
+        );
+
+
+    success(
+        "Payslip downloaded."
+    );
+
+}
+
+
+/* =========================================
+   SHIFT DETAILS
+========================================= */
+
+function openShiftDetails(){
+
+openModal(
+
+"Shift Details",
+
+`
+
+<div class="detail">
+<span>Date</span>
+<strong>Monday, 12 August</strong>
+</div>
+
+<div class="detail">
+<span>Time</span>
+<strong>9:00 AM – 5:00 PM</strong>
+</div>
+
+<div class="detail">
+<span>Department</span>
+<strong>Front of House</strong>
+</div>
+
+<div class="detail">
+<span>Location</span>
+<strong>${employee.location}</strong>
+</div>
+
+<div class="detail">
+<span>Role</span>
+<strong>${employee.role}</strong>
+</div>
+
+<div class="detail">
+<span>Status</span>
+<strong>Upcoming</strong>
+</div>
+
+`
+
+);
+
+}
+
+
+/* =========================================
+   MY SHIFTS
+========================================= */
+
+function openMyShifts(){
+
+openModal(
+
+"My Shifts",
+
+`
+
+<div class="tabs">
+
+<button class="active">
+Upcoming
+</button>
+
+<button>
+Completed
+</button>
+
+<button>
+Cancelled
+</button>
+
+</div>
+
+
+<div class="detail">
+<span>Mon, 12 Aug</span>
+<strong>9:00 AM – 5:00 PM</strong>
+</div>
+
+<div class="detail">
+<span>Tue, 13 Aug</span>
+<strong>2:00 PM – 10:00 PM</strong>
+</div>
+
+<div class="detail">
+<span>Wed, 14 Aug</span>
+<strong>9:00 AM – 5:00 PM</strong>
+</div>
+
+<div class="detail">
+<span>Thu, 15 Aug</span>
+<strong>Day Off</strong>
+</div>
+
+<div class="detail">
+<span>Fri, 16 Aug</span>
+<strong>9:00 AM – 5:00 PM</strong>
+</div>
+
+`
+
+);
+
+}
+
+
+/* =========================================
+   CALENDAR
+========================================= */
+
+function openCalendar(){
+
+let days = "";
+
+
+for(
+let i = 1;
+i <= 31;
+i++
+){
+
+days +=
+
+`
+<div>
+
+<strong>
+${i}
+</strong>
+
+${
+i === 12 ||
+i === 13 ||
+i === 16
+
+?
+
+`
+<br>
+<span
+style="
+font-size:6px;
+color:#ab91ff;
+">
+
+Working
+
+</span>
+`
+
+:
+
+""
+
+}
+
+</div>
+`;
+
+}
+
+
+openModal(
+
+"August 2024",
+
+`
+
+<div class="calendar">
+
+<div>Mon</div>
+<div>Tue</div>
+<div>Wed</div>
+<div>Thu</div>
+<div>Fri</div>
+<div>Sat</div>
+<div>Sun</div>
+
+${days}
+
+</div>
+
+`
+
+);
+
+}
+
+
+/* =========================================
+   REQUESTS
+========================================= */
+
+function openRequests(){
+
+    const savedRequests =
+        JSON.parse(
+            localStorage
+            .getItem(
+                "staffRequests"
+            )
+        ) || [];
+
+
+    let content = `
+
+<div class="tabs">
+
+<button class="active">
+All
+</button>
+
+<button>
+Time Off
+</button>
+
+<button>
+Swap
+</button>
+
+<button>
+Drop
+</button>
+
+</div>
+
+`;
+
+
+    if(
+        savedRequests.length === 0
+    ){
+
+        content += `
+
+<p
+style="
+color:#929fb1;
+font-size:9px;
+">
+
+No new requests submitted.
+
+</p>
+
+`;
+
+    }
+
+
+    savedRequests
+    .reverse()
+    .forEach(
+        request => {
+
+            content += `
+
+<div
+style="
+padding:10px;
+border:1px solid #27384d;
+border-radius:7px;
+margin-bottom:7px;
+">
+
+<strong
+style="
+font-size:9px;
+">
+
+${request.type}
+
+</strong>
+
+<p
+style="
+color:#929fb1;
+font-size:8px;
+">
+
+Status:
+${request.status}
+
+</p>
+
+</div>
+
+`;
+
         }
-        return parts[0][0].toUpperCase();
-      }
+    );
 
-      document.getElementById("user-firstname").textContent = firstName;
-      document.getElementById("user-fullname").textContent = fullName;
-      document.getElementById("user-role").textContent = role;
-      document.getElementById("avatar-initials").textContent = getInitials(fullName);
 
-      // Modal helper
-      const modal = document.getElementById("app-modal");
-      const modalCloseBtn = document.getElementById("modal-close-btn");
+    openModal(
+        "Requests",
+        content
+    );
 
-      modalCloseBtn.addEventListener("click", () => modal.classList.remove("active"));
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) modal.classList.remove("active");
-      });
-    });
-  </script>
+}
+
+
+/* =========================================
+   NOTIFICATIONS
+========================================= */
+
+function openNotifications(){
+
+openModal(
+
+"Notifications",
+
+`
+
+<div class="notification-row">
+
+<span class="dot dot-purple"></span>
+
+<span>
+Your shift on 16 Aug has been updated
+</span>
+
+<time>
+10 min ago
+</time>
+
+</div>
+
+
+<div class="notification-row">
+
+<span class="dot dot-orange"></span>
+
+<span>
+New manager announcement
+</span>
+
+<time>
+1 hour ago
+</time>
+
+</div>
+
+
+<div class="notification-row">
+
+<span class="dot dot-green"></span>
+
+<span>
+Your time-off request was received
+</span>
+
+<time>
+2 hours ago
+</time>
+
+</div>
+
+
+<button
+class="outline-button"
+style="
+width:100%;
+margin-top:10px;
+"
+onclick="success('All notifications marked as read.')">
+
+Mark all as read
+
+</button>
+
+`
+
+);
+
+}
+
+
+/* =========================================
+   MANAGER UPDATES
+========================================= */
+
+function openManagerUpdates(){
+
+openModal(
+
+"Manager Updates",
+
+`
+
+<div
+style="
+padding:11px;
+border:1px solid #27384d;
+border-radius:7px;
+margin-bottom:8px;
+">
+
+<strong
+style="
+font-size:9px;
+">
+
+Team Meeting
+
+</strong>
+
+<p
+style="
+color:#929fb1;
+font-size:8px;
+">
+
+Team meeting on Friday at 4 PM.
+
+</p>
+
+</div>
+
+
+<div
+style="
+padding:11px;
+border:1px solid #27384d;
+border-radius:7px;
+">
+
+<strong
+style="
+font-size:9px;
+">
+
+Schedule Reminder
+
+</strong>
+
+<p
+style="
+color:#929fb1;
+font-size:8px;
+">
+
+Please review your upcoming shifts.
+
+</p>
+
+</div>
+
+`
+
+);
+
+}
+
+
+/* =========================================
+   PROFILE
+========================================= */
+
+function openProfile(){
+
+openModal(
+
+"Profile",
+
+`
+
+<div
+style="
+display:flex;
+gap:10px;
+align-items:center;
+margin-bottom:13px;
+">
+
+<div class="avatar">
+
+${employeeInitials()}
+
+</div>
+
+
+<div>
+
+<strong
+style="
+font-size:12px;
+">
+
+${employee.name}
+
+</strong>
+
+<p
+style="
+margin:3px 0 0;
+color:#929fb1;
+font-size:8px;
+">
+
+${employee.role}
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="detail">
+<span>Employee ID</span>
+<strong>${employee.employeeId}</strong>
+</div>
+
+<div class="detail">
+<span>Phone</span>
+<strong>${employee.phone}</strong>
+</div>
+
+<div class="detail">
+<span>Email</span>
+<strong>${employee.email}</strong>
+</div>
+
+<div class="detail">
+<span>Location</span>
+<strong>${employee.location}</strong>
+</div>
+
+`
+
+);
+
+}
+
+
+/* =========================================
+   SETTINGS
+========================================= */
+
+function openSettings(){
+
+openModal(
+
+"Settings",
+
+`
+
+<div class="detail">
+
+<span>
+Email Notifications
+</span>
+
+<strong>
+Enabled
+</strong>
+
+</div>
+
+
+<div class="detail">
+
+<span>
+Shift Reminders
+</span>
+
+<strong>
+Enabled
+</strong>
+
+</div>
+
+
+<div class="detail">
+
+<span>
+Request Updates
+</span>
+
+<strong>
+Enabled
+</strong>
+
+</div>
+
+`
+
+);
+
+}
+
+
+/* =========================================
+   HELP
+========================================= */
+
+function openHelp(){
+
+openModal(
+
+"Help & Support",
+
+`
+
+<div
+style="
+padding:10px;
+border:1px solid #27384d;
+border-radius:7px;
+margin-bottom:7px;
+">
+
+<strong>
+Schedule problem
+</strong>
+
+<p
+style="
+color:#929fb1;
+font-size:8px;
+">
+
+Contact your manager if your shift is incorrect.
+
+</p>
+
+</div>
+
+
+<div
+style="
+padding:10px;
+border:1px solid #27384d;
+border-radius:7px;
+">
+
+<strong>
+Technical support
+</strong>
+
+<p
+style="
+color:#929fb1;
+font-size:8px;
+">
+
+Contact the system administrator if the dashboard is not working correctly.
+
+</p>
+
+</div>
+
+`
+
+);
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+function logout(){
+
+    possibleUserKeys
+    .forEach(
+        key => {
+
+            localStorage
+                .removeItem(
+                    key
+                );
+
+
+            sessionStorage
+                .removeItem(
+                    key
+                );
+
+        }
+    );
+
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+loadEmployee();
+
+lucide.createIcons();
+
+</script>
+
 </body>
 </html>
