@@ -126,6 +126,24 @@ function generateCompanyID() {
     return "SHFT-" + random;
 }
 
+    // Create company object
+    const company = {
+        companyName: companyname.value,
+        email: email.value,
+        password: signup_password.value,
+        companyID: companyID,
+        role:"admin",
+        employees: []
+    };
+
+
+    // Save company
+    localStorage.setItem(
+        "company",
+        JSON.stringify(company)
+    );
+
+
 
 // Alert for empty place
 function submitSignup() {
@@ -194,22 +212,6 @@ function submitSignup() {
     const companyID = generateCompanyID();
 
 
-    // Create company object
-    const company = {
-        companyName: companyname.value,
-        email: email.value,
-        password: signup_password.value,
-        companyID: companyID,
-        role:"admin",
-        employees: []
-    };
-
-
-    // Save company
-    localStorage.setItem(
-        "company",
-        JSON.stringify(company)
-    );
 
 
     // Go to success page

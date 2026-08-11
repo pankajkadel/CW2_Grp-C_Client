@@ -182,12 +182,11 @@ body {
 }
 
 .signup_form form {
+    display: flex;
     flex-direction: column;
 }
 
-.signup_form form.active {
-    display: flex;
-}
+
 
 .signup_form h2 {
     color: var(--text-primary);
@@ -342,6 +341,22 @@ input[type="checkbox"] {
     transform: translateY(1px);
 }
 
+@media (max-width: 900px) {
+    .signup {
+        flex-direction: column;
+        min-height: auto;
+    }
+    .signup_img {
+        min-height: 280px;
+        margin: 12px;
+    }
+    .signup_form {
+        padding: 44px 28px;
+    }
+    .signup_form h2 {
+        font-size: 28px;
+    }
+}
 
 /* Alert system if user didnot fill the space*/
 .input-error {
