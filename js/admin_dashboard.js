@@ -748,7 +748,7 @@ function updateLeaveStatus(index,status){
 
 function isEmployeeOnLeave(employee,date){
 
-    if(!employee.leaveDates){
+     if (!employee || !employee.leaveDates) {
 
         return false;
 
@@ -1140,7 +1140,7 @@ function loadEmployees(){
 
 
     select.innerHTML =
-    `<option>Select Employee</option>`;
+    `<option value="">Select Employee</option>`;
 
 
     const selectedDate =
@@ -1236,43 +1236,69 @@ function assignShift(){
     );
 
 
-    // Check employee leave before assigning
 
-    if(isEmployeeOnLeave(employee, date)){
+        // Check employee exists FIRST
 
-      alert(
-          employee.name + " is on leave on this date"
-      );
+    if (!employee) {
 
-      return;
+        console.log("Employee not found");
 
+        console.log("Selected email:", employeeEmail);
+
+        console.log("Current company:", currentUser.companyID);
+
+        console.log("Employees:", employees);
+
+        alert("Employee not found");
+        return;
     }
 
 
-    if(employee){
+    // Check leave AFTER employee is found
 
-        employee.shifts.push({
+    if (isEmployeeOnLeave(employee, date)) {
 
-            shift: shift,
-            date: date,
-            start: start,
-            end: end
-
-        });
-
-
-        localStorage.setItem(
-            "staffApplications",
-            JSON.stringify(employees)
+        alert(
+            employee.name +
+            " is on leave on this date"
         );
 
+        return;
+    }
 
-        alert("Shift assigned");
-        generateCalendar();
+
+    // Make sure shifts exists
+
+    if (!employee.shifts) {
+        employee.shifts = [];
+    }
+
+
+    // Add shift
+
+    employee.shifts.push({
+
+        shift: shift,
+        date: date,
+        start: start,
+        end: end
+
+    });
+
+
+    localStorage.setItem(
+        "staffApplications",
+        JSON.stringify(employees)
+    );
+
+
+    alert("Shift assigned");
+
+    generateCalendar();
 
     }
 
-}
+
 
 function getShiftStatus(shift) {
 
