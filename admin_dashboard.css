@@ -1027,3 +1027,70 @@ padding: 20px 0;
 .employee-title span {
   display: block;
 }
+
+
+/* send notice */
+.notice-panel {
+    margin-top: 20px;
+}
+
+.notice-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 18px;
+    font-size: 18px;
+}
+
+.notice-title svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.notice-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.notice-form select,
+.notice-form input,
+.notice-form textarea {
+    width: 100%;
+    background: var(--bg-field);
+    color: var(--text-primary);
+    border: 1px solid var(--bg-field-border);
+    border-radius: 8px;
+    padding: 11px 12px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.notice-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.notice-form select:focus,
+.notice-form input:focus,
+.notice-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.notice-form button {
+    width: fit-content;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.notice-form button:hover {
+    background: var(--accent-hover);
+}
