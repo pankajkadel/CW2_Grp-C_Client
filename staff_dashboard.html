@@ -1,661 +1,778 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Employee Dashboard</title>
+  <script src="https://unpkg.com/feather-icons"></script>
+  
+  <style>
+    :root {
+      --bg-main: #131525;
+      --bg-sidebar: #1b1d31;
+      --bg-card: #20233b;
+      --bg-card-hover: #262a46;
+      --bg-pill: #2a2e4f;
+      --accent-purple: #6c5ce7;
+      --accent-purple-hover: #5b4cc4;
+      --accent-teal: #00cec9;
+      --accent-yellow: #fdcb6e;
+      --accent-pink: #ff7675;
+      --text-main: #ffffff;
+      --text-muted: #8d92b0;
+      --border-color: #2b2f52;
+    }
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    >
+    /* CRITICAL MOBILE RESETS */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <title>Employee Dashboard</title>
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
 
-    <!-- External CSS -->
-    <link rel="stylesheet" href="staff_dashboard.css">
+    body {
+      display: flex;
+      min-height: 100vh;
+    }
 
-    <!-- Feather Icons -->
-    <script src="https://unpkg.com/feather-icons"></script>
+    /* SIDEBAR (Desktop) */
+    .sidebar {
+      width: 240px;
+      background-color: var(--bg-sidebar);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--accent-purple);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-item.active {
+      background: var(--accent-purple);
+      color: #fff;
+    }
+
+    .badge {
+      background: var(--accent-purple);
+      color: #fff;
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      margin-left: auto;
+    }
+
+    .sidebar-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    /* MAIN CONTAINER */
+    .main-content {
+      flex: 1;
+      padding: 28px 40px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .profile-widget {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .notification-btn {
+      position: relative;
+      background: var(--bg-card);
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .notif-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: var(--accent-purple);
+      font-size: 10px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      background: var(--bg-pill);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-info .name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .user-info .role {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .greeting h1 {
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .greeting p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    /* DESKTOP GRIDS */
+    .grid-top {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+      width: 100%;
+    }
+
+    .grid-actions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+      width: 100%;
+    }
+
+    .grid-bottom {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border-radius: 14px;
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .btn-primary {
+      background: var(--accent-purple);
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-secondary {
+      background: var(--bg-pill);
+      color: #fff;
+      border: 1px solid var(--border-color);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .action-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .action-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .action-text div:first-child {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .action-text div:last-child {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .progress-container {
+      position: relative;
+      width: 70px;
+      height: 70px;
+      flex-shrink: 0;
+    }
+
+    .progress-container svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .progress-container circle {
+      fill: none;
+      stroke-width: 6;
+      stroke-linecap: round;
+    }
+
+    .circle-bg { stroke: var(--bg-pill); }
+    .circle-val {
+      stroke: var(--accent-teal);
+      stroke-dasharray: 175;
+      stroke-dashoffset: 44;
+    }
+
+    .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .schedule-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 12px;
+    }
+
+    .status-pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--bg-pill);
+      color: var(--text-muted);
+    }
+
+    .status-pill.upcoming {
+      background: rgba(108, 92, 231, 0.2);
+      color: var(--accent-purple);
+    }
+
+    .summary-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+
+    .summary-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .summary-val {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      width: 400px;
+      max-width: 100%;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-close {
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .modal-body {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* HARD RESPONSIVE BREAKPOINT FOR MOBILE */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column !important;
+        width: 100vw !important;
+        overflow-x: hidden !important;
+      }
+
+      .sidebar {
+        width: 100% !important;
+        max-width: 100vw !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        padding: 12px !important;
+        box-sizing: border-box !important;
+      }
+
+      .brand-icon {
+        margin-bottom: 0 !important;
+      }
+
+      .nav-list {
+        display: none !important; /* Hides desktop navigation menu on small screens to save space */
+      }
+
+      .sidebar-footer {
+        display: none !important;
+      }
+
+      .main-content {
+        padding: 14px !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+      }
+
+      .grid-top,
+      .grid-actions,
+      .grid-bottom {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+      }
+
+      .schedule-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .schedule-row > div {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-
-        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-            <div class="brand-icon">
-                <i data-feather="users" style="color: white;"></i>
-            </div>
-
-            <div style="font-weight: 600; font-size: 14px; color: #fff;">
-                Dashboard
-            </div>
-        </div>
-
-        <ul class="nav-list">
-
-            <li>
-                <a href="#" class="nav-item active" data-page="Dashboard">
-                    <i data-feather="grid"></i>
-                    Dashboard
-                </a>
-            </li>
-
-            <li>
-                <a href="#" class="nav-item" data-page="My Shifts">
-                    <i data-feather="calendar"></i>
-                    My Shifts
-                </a>
-            </li>
-
-            <li>
-                <a href="#" class="nav-item" data-page="Calendar">
-                    <i data-feather="clock"></i>
-                    Calendar
-                </a>
-            </li>
-
-            <li>
-                <a href="#" class="nav-item" data-page="Requests">
-                    <i data-feather="repeat"></i>
-                    Requests
-                </a>
-            </li>
-
-            <li>
-                <a href="#" class="nav-item" data-page="Notifications">
-                    <i data-feather="bell"></i>
-                    Notifications
-                    <span class="badge" id="notif-count">2</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#" class="nav-item" data-page="Profile">
-                    <i data-feather="user"></i>
-                    Profile
-                </a>
-            </li>
-
-        </ul>
-
-        <div class="sidebar-footer">
-
-            <div class="info-card">
-
-                <i data-feather="clock"></i>
-
-                <div>
-                    <div>Local time</div>
-
-                    <strong
-                        style="color: #fff; font-size: 11px;"
-                        id="live-clock"
-                    >
-                    </strong>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </aside>
-
-
-    <!-- MAIN CONTENT -->
-    <main class="main-content">
-
-        <div class="header-bar">
-
-            <div></div>
-
-            <div class="profile-widget">
-
-                <button
-                    class="notification-btn"
-                    id="header-notif-btn"
-                >
-                    <i
-                        data-feather="bell"
-                        style="width: 16px; height: 16px;"
-                    ></i>
-
-                    <span
-                        class="notif-badge"
-                        id="header-notif-badge"
-                    >
-                        2
-                    </span>
-                </button>
-
-
-                <div
-                    class="user-profile"
-                    id="user-menu-btn"
-                >
-
-                    <div
-                        class="avatar"
-                        id="avatar-initials"
-                    >
-                        --
-                    </div>
-
-                    <div class="user-info">
-
-                        <span
-                            class="name"
-                            id="user-fullname"
-                        ></span>
-
-                        <span
-                            class="role"
-                            id="user-role"
-                        ></span>
-
-                    </div>
-
-                    <i
-                        data-feather="chevron-down"
-                        style="width: 14px; color: var(--text-muted);"
-                    ></i>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- GREETING -->
-        <section class="greeting">
-
-            <h1>
-                Good morning,
-                <span id="user-firstname"></span>
-                👋
-            </h1>
-
-            <p>
-                Here's what's happening today.
-            </p>
-
-        </section>
-
-
-        <!-- TOP GRID -->
-        <div class="grid-top">
-
-            <!-- NEXT SHIFT -->
-            <div class="card">
-
-                <div class="card-title">
-
-                    <div
-                        class="icon-box"
-                        style="background: rgba(108, 92, 231, 0.2); color: var(--accent-purple);"
-                    >
-                        <i data-feather="calendar"></i>
-                    </div>
-
-                    Your next shift
-
-                </div>
-
-                <div style="margin: 16px 0;">
-
-                    <h2 style="font-size: 18px; font-weight: 600;">
-                        Today, 9:00 AM – 5:00 PM
-                    </h2>
-
-                    <p
-                        style="font-size: 12px; color: var(--text-muted); margin-top: 4px;"
-                    >
-                        Front of House • Shift
-                    </p>
-
-                </div>
-
-                <button
-                    class="btn-primary"
-                    id="btn-shift-details"
-                >
-                    View shift details
-
-                    <i
-                        data-feather="chevron-right"
-                        style="width: 14px;"
-                    ></i>
-
-                </button>
-
-            </div>
-
-
-            <!-- WEEKLY EARNINGS -->
-            <div
-                class="card"
-                style="display: flex; justify-content: space-between; align-items: center;"
-            >
-
-                <div>
-
-                    <div
-                        class="card-title"
-                        style="margin-bottom: 12px;"
-                    >
-
-                        <div
-                            class="icon-box"
-                            style="background: rgba(0, 206, 201, 0.2); color: var(--accent-teal);"
-                        >
-                            <i data-feather="shopping-bag"></i>
-                        </div>
-
-                        Weekly earnings
-
-                    </div>
-
-                    <h2
-                        style="font-size: 24px; font-weight: 700;"
-                    >
-                        £184.50
-                    </h2>
-
-                    <p
-                        style="font-size: 11px; color: var(--text-muted); margin: 4px 0 14px 0;"
-                    >
-                        75% of £246.00 goal
-                    </p>
-
-                    <button
-                        class="btn-secondary"
-                        id="btn-payslip"
-                    >
-                        <i
-                            data-feather="file-text"
-                            style="width: 12px;"
-                        ></i>
-
-                        View payslip
-                    </button>
-
-                </div>
-
-
-                <div class="progress-container">
-
-                    <svg viewBox="0 0 64 64">
-
-                        <circle
-                            class="circle-bg"
-                            cx="32"
-                            cy="32"
-                            r="28"
-                        ></circle>
-
-                        <circle
-                            class="circle-val"
-                            cx="32"
-                            cy="32"
-                            r="28"
-                        ></circle>
-
-                    </svg>
-
-                    <span class="progress-text">
-                        75%
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- MANAGER UPDATES -->
-            <div class="card">
-
-                <div
-                    class="card-title"
-                    style="margin-bottom: 12px;"
-                >
-
-                    <div
-                        class="icon-box"
-                        style="background: rgba(253, 203, 110, 0.2); color: var(--accent-yellow);"
-                    >
-                        <i data-feather="volume-2"></i>
-                    </div>
-
-                    Manager Updates
-
-                </div>
-
-                <div
-                    style="
-                        background: var(--bg-pill);
-                        padding: 12px;
-                        border-radius: 8px;
-                        font-size: 12px;
-                        margin-bottom: 12px;
-                    "
-                >
-                    Team meeting on Friday at 4 PM
-                </div>
-
-                <button
-                    class="btn-secondary"
-                    id="btn-all-updates"
-                >
-                    View all updates
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- ACTIONS GRID -->
-        <div class="grid-actions">
-
-            <!-- TIME OFF -->
-            <div
-                class="action-card"
-                id="action-time-off"
-            >
-
-                <div class="action-left">
-
-                    <div
-                        class="icon-box"
-                        style="background: rgba(108, 92, 231, 0.2); color: var(--accent-purple);"
-                    >
-                        <i data-feather="edit-3"></i>
-                    </div>
-
-                    <div class="action-text">
-
-                        <div>Request Time Off</div>
-
-                        <div>Request days off</div>
-
-                    </div>
-
-                </div>
-
-                <i
-                    data-feather="chevron-right"
-                    style="color: var(--text-muted); width: 16px;"
-                ></i>
-
-            </div>
-
-
-            <!-- SWAP SHIFT -->
-            <div
-                class="action-card"
-                id="action-swap-shift"
-            >
-
-                <div class="action-left">
-
-                    <div
-                        class="icon-box"
-                        style="background: rgba(0, 206, 201, 0.2); color: var(--accent-teal);"
-                    >
-                        <i data-feather="refresh-cw"></i>
-                    </div>
-
-                    <div class="action-text">
-
-                        <div>Swap Shift</div>
-
-                        <div>Find a shift to swap</div>
-
-                    </div>
-
-                </div>
-
-                <i
-                    data-feather="chevron-right"
-                    style="color: var(--text-muted); width: 16px;"
-                ></i>
-
-            </div>
-
-
-            <!-- DROP SHIFT -->
-            <div
-                class="action-card"
-                id="action-drop-shift"
-            >
-
-                <div class="action-left">
-
-                    <div
-                        class="icon-box"
-                        style="background: rgba(255, 118, 117, 0.2); color: var(--accent-pink);"
-                    >
-                        <i data-feather="trash-2"></i>
-                    </div>
-
-                    <div class="action-text">
-
-                        <div>Drop Shift</div>
-
-                        <div>Give up a shift</div>
-
-                    </div>
-
-                </div>
-
-                <i
-                    data-feather="chevron-right"
-                    style="color: var(--text-muted); width: 16px;"
-                ></i>
-
-            </div>
-
-
-            <!-- VIEW PAYSLIP -->
-            <div
-                class="action-card"
-                id="action-view-payslip"
-            >
-
-                <div class="action-left">
-
-                    <div
-                        class="icon-box"
-                        style="background: rgba(9, 132, 227, 0.2); color: #0984e3;"
-                    >
-                        <i data-feather="file-text"></i>
-                    </div>
-
-                    <div class="action-text">
-
-                        <div>View Payslip</div>
-
-                        <div>See your payslips</div>
-
-                    </div>
-
-                </div>
-
-                <i
-                    data-feather="chevron-right"
-                    style="color: var(--text-muted); width: 16px;"
-                ></i>
-
-            </div>
-
-        </div>
-
-
-        <!-- BOTTOM GRID -->
-        <div class="grid-bottom">
-
-            <!-- MY SCHEDULE -->
-            <div class="card">
-
-                <div class="table-header">
-
-                    <div class="card-title">
-
-                        <div
-                            class="icon-box"
-                            style="background: rgba(108, 92, 231, 0.2); color: var(--accent-purple);"
-                        >
-                            <i data-feather="calendar"></i>
-                        </div>
-
-                        My Schedule
-
-                    </div>
-
-                </div>
-
-
-                <div class="schedule-row">
-
-                    <div>
-                        <strong style="color: #fff;">
-                            Mon 03 Aug
-                        </strong>
-                    </div>
-
-                    <div>
-                        9:00 AM – 5:00 PM
-                    </div>
-
-                    <div>
-                        <span class="status-pill upcoming">
-                            Upcoming
-                        </span>
-                    </div>
-
-                </div>
-
-
-                <div class="schedule-row">
-
-                    <div>
-                        <span style="color: var(--text-muted);">
-                            Wed 05 Aug
-                        </span>
-                    </div>
-
-                    <div>
-                        2:00 PM – 10:00 PM
-                    </div>
-
-                    <div>
-                        <span class="status-pill">
-                            Scheduled
-                        </span>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- SHIFT SUMMARY -->
-            <div class="card">
-
-                <div
-                    class="card-title"
-                    style="margin-bottom: 16px;"
-                >
-
-                    <div
-                        class="icon-box"
-                        style="background: rgba(108, 92, 231, 0.2); color: var(--accent-purple);"
-                    >
-                        <i data-feather="bar-chart-2"></i>
-                    </div>
-
-                    Shift Summary
-
-                </div>
-
-
-                <div class="summary-item">
-
-                    <div class="summary-left">
-
-                        <div>
-
-                            <div
-                                style="font-size: 12px; font-weight: 600;"
-                            >
-                                Hours worked
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="summary-val">
-                        24.5 hrs
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </main>
-
-
-    <!-- MODAL -->
-    <div
-        class="modal-overlay"
-        id="app-modal"
-    >
-
-        <div class="modal-box">
-
-            <div class="modal-header">
-
-                <h3 id="modal-title">
-                    Notification
-                </h3>
-
-                <span
-                    class="modal-close"
-                    id="modal-close-btn"
-                >
-                    &times;
-                </span>
-
-            </div>
-
-            <div
-                class="modal-body"
-                id="modal-body"
-            ></div>
-
-            <div class="modal-footer">
-
-                <button
-                    class="btn-primary"
-                    id="modal-action-btn"
-                >
-                    Confirm
-                </button>
-
-            </div>
-
-        </div>
-
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+      <div class="brand-icon">
+        <i data-feather="users" style="color: white;"></i>
+      </div>
+      <div style="font-weight: 600; font-size: 14px; color: #fff;">Dashboard</div>
     </div>
 
+    <ul class="nav-list">
+      <li><a href="#" class="nav-item active" data-page="Dashboard"><i data-feather="grid"></i> Dashboard</a></li>
+      <li><a href="#" class="nav-item" data-page="My Shifts"><i data-feather="calendar"></i> My Shifts</a></li>
+      <li><a href="#" class="nav-item" data-page="Calendar"><i data-feather="clock"></i> Calendar</a></li>
+      <li><a href="#" class="nav-item" data-page="Requests"><i data-feather="repeat"></i> Requests</a></li>
+      <li>
+        <a href="#" class="nav-item" data-page="Notifications">
+          <i data-feather="bell"></i> Notifications
+          <span class="badge" id="notif-count">2</span>
+        </a>
+      </li>
+      <li><a href="#" class="nav-item" data-page="Profile"><i data-feather="user"></i> Profile</a></li>
+    </ul>
 
-    <!-- External JavaScript -->
-    <script src="staff_dashboard.js"></script>
+    <div class="sidebar-footer">
+      <div class="info-card">
+        <i data-feather="clock"></i>
+        <div>
+          <div>Local time</div>
+          <strong style="color: #fff; font-size: 11px;" id="live-clock">Mon, 03 Aug 2026<br/>08:15 AM</strong>
+        </div>
+      </div>
+    </div>
+  </aside>
 
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <div class="header-bar">
+      <div></div>
+      <div class="profile-widget">
+        <button class="notification-btn" id="header-notif-btn">
+          <i data-feather="bell" style="width: 16px; height: 16px;"></i>
+          <span class="notif-badge" id="header-notif-badge">2</span>
+        </button>
+        <div class="user-profile" id="user-menu-btn">
+          <div class="avatar" id="avatar-initials">--</div>
+          <div class="user-info">
+            <span class="name" id="user-fullname"></span>
+            <span class="role" id="user-role"></span>
+          </div>
+          <i data-feather="chevron-down" style="width: 14px; color: var(--text-muted);"></i>
+        </div>
+      </div>
+    </div>
+
+    <section class="greeting">
+      <h1>Good morning, <span id="user-firstname"></span> 👋</h1>
+      <p>Here's what's happening today.</p>
+    </section>
+
+    <!-- TOP GRID -->
+    <div class="grid-top">
+      <div class="card">
+        <div class="card-title">
+          <div class="icon-box" style="background: rgba(108, 92, 231, 0.2); color: var(--accent-purple);">
+            <i data-feather="calendar"></i>
+          </div>
+          Your next shift
+        </div>
+        <div style="margin: 16px 0;">
+          <h2 style="font-size: 18px; font-weight: 600;">Today, 9:00 AM – 5:00 PM</h2>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Front of House • Shift</p>
+        </div>
+        <button class="btn-primary" id="btn-shift-details">View shift details <i data-feather="chevron-right" style="width: 14px;"></i></button>
+      </div>
+
+      <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div class="card-title" style="margin-bottom: 12px;">
+            <div class="icon-box" style="background: rgba(0, 206, 201, 0.2); color: var(--accent-teal);">
+              <i data-feather="shopping-bag"></i>
+            </div>
+            Weekly earnings
+          </div>
+          <h2 style="font-size: 24px; font-weight: 700;">£184.50</h2>
+          <p style="font-size: 11px; color: var(--text-muted); margin: 4px 0 14px 0;">75% of £246.00 goal</p>
+          <button class="btn-secondary" id="btn-payslip"><i data-feather="file-text" style="width: 12px;"></i> View payslip</button>
+        </div>
+        <div class="progress-container">
+          <svg viewBox="0 0 64 64">
+            <circle class="circle-bg" cx="32" cy="32" r="28" />
+            <circle class="circle-val" cx="32" cy="32" r="28" />
+          </svg>
+          <span class="progress-text">75%</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom: 12px;">
+          <div class="icon-box" style="background: rgba(253, 203, 110, 0.2); color: var(--accent-yellow);">
+            <i data-feather="volume-2"></i>
+          </div>
+          Manager Updates
+        </div>
+        <div style="background: var(--bg-pill); padding: 12px; border-radius: 8px; font-size: 12px; margin-bottom: 12px;">
+          Team meeting on Friday at 4 PM
+        </div>
+        <button class="btn-secondary" id="btn-all-updates">View all updates</button>
+      </div>
+    </div>
+
+    <!-- ACTIONS GRID -->
+    <div class="grid-actions">
+      <div class="action-card" id="action-time-off">
+        <div class="action-left">
+          <div class="icon-box" style="background: rgba(108, 92, 231, 0.2); color: var(--accent-purple);"><i data-feather="edit-3"></i></div>
+          <div class="action-text">
+            <div>Request Time Off</div>
+            <div>Request days off</div>
+          </div>
+        </div>
+        <i data-feather="chevron-right" style="color: var(--text-muted); width: 16px;"></i>
+      </div>
+
+      <div class="action-card" id="action-swap-shift">
+        <div class="action-left">
+          <div class="icon-box" style="background: rgba(0, 206, 201, 0.2); color: var(--accent-teal);"><i data-feather="refresh-cw"></i></div>
+          <div class="action-text">
+            <div>Swap Shift</div>
+            <div>Find a shift to swap</div>
+          </div>
+        </div>
+        <i data-feather="chevron-right" style="color: var(--text-muted); width: 16px;"></i>
+      </div>
+
+      <div class="action-card" id="action-drop-shift">
+        <div class="action-left">
+          <div class="icon-box" style="background: rgba(255, 118, 117, 0.2); color: var(--accent-pink);"><i data-feather="trash-2"></i></div>
+          <div class="action-text">
+            <div>Drop Shift</div>
+            <div>Give up a shift</div>
+          </div>
+        </div>
+        <i data-feather="chevron-right" style="color: var(--text-muted); width: 16px;"></i>
+      </div>
+
+      <div class="action-card" id="action-view-payslip">
+        <div class="action-left">
+          <div class="icon-box" style="background: rgba(9, 132, 227, 0.2); color: #0984e3;"><i data-feather="file-text"></i></div>
+          <div class="action-text">
+            <div>View Payslip</div>
+            <div>See your payslips</div>
+          </div>
+        </div>
+        <i data-feather="chevron-right" style="color: var(--text-muted); width: 16px;"></i>
+      </div>
+    </div>
+
+    <!-- BOTTOM GRID -->
+    <div class="grid-bottom">
+      <div class="card">
+        <div class="table-header">
+          <div class="card-title">
+            <div class="icon-box" style="background: rgba(108, 92, 231, 0.2); color: var(--accent-purple);"><i data-feather="calendar"></i></div>
+            My Schedule
+          </div>
+        </div>
+
+        <div class="schedule-row">
+          <div><strong style="color: #fff;">Mon 03 Aug</strong></div>
+          <div>9:00 AM – 5:00 PM</div>
+          <div><span class="status-pill upcoming">Upcoming</span></div>
+        </div>
+
+        <div class="schedule-row">
+          <div><span style="color: var(--text-muted);">Wed 05 Aug</span></div>
+          <div>2:00 PM – 10:00 PM</div>
+          <div><span class="status-pill">Scheduled</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom: 16px;">
+          <div class="icon-box" style="background: rgba(108, 92, 231, 0.2); color: var(--accent-purple);"><i data-feather="bar-chart-2"></i></div>
+          Shift Summary
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-left">
+            <div>
+              <div style="font-size: 12px; font-weight: 600;">Hours worked</div>
+            </div>
+          </div>
+          <div class="summary-val">24.5 hrs</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL SYSTEM -->
+  <div class="modal-overlay" id="app-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-title">Notification</h3>
+        <span class="modal-close" id="modal-close-btn">&times;</span>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn-primary" id="modal-action-btn">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof feather !== "undefined") {
+        feather.replace();
+      }
+
+      // Read real user data from localStorage dynamically
+      const storedUser = JSON.parse(localStorage.getItem("user")) || 
+                         JSON.parse(localStorage.getItem("currentUser")) || 
+                         JSON.parse(localStorage.getItem("signedInUser"));
+
+      let firstName = "";
+      let fullName = "";
+      let role = "Team Member";
+
+      if (storedUser) {
+        if (storedUser.firstName) {
+          firstName = storedUser.firstName;
+          fullName = `${storedUser.firstName} ${storedUser.lastName || ""}`.trim();
+        } else if (storedUser.name || storedUser.fullName) {
+          fullName = storedUser.name || storedUser.fullName;
+          firstName = fullName.split(" ")[0];
+        }
+        if (storedUser.role) {
+          role = storedUser.role;
+        }
+      }
+
+      function getInitials(name) {
+        if (!name) return "--";
+        const parts = name.trim().split(" ");
+        if (parts.length >= 2) {
+          return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+        }
+        return parts[0][0].toUpperCase();
+      }
+
+      document.getElementById("user-firstname").textContent = firstName;
+      document.getElementById("user-fullname").textContent = fullName;
+      document.getElementById("user-role").textContent = role;
+      document.getElementById("avatar-initials").textContent = getInitials(fullName);
+ 
+      // Modal helper
+      const modal = document.getElementById("app-modal");
+      const modalCloseBtn = document.getElementById("modal-close-btn");
+
+      modalCloseBtn.addEventListener("click", () => modal.classList.remove("active"));
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.remove("active");
+      });
+    });
+  </script>
 </body>
 </html>
