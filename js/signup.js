@@ -196,10 +196,10 @@ function submitSignup() {
 
     // Create company object
     const company = {
-        name: companyname.value,
+        companyName: companyname.value,
         email: email.value,
         password: signup_password.value,
-        id: companyID,
+        companyID: companyID,
         role:"admin",
         employees: []
     };

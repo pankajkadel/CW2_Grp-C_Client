@@ -205,7 +205,7 @@ function submitSignup() {
         alert("No company exists.");
         return;
     }
-     if (company.id !== companyID.value.trim()) {
+     if (company.companyID!== companyID.value.trim()) {
         alert("Invalid Company ID.");
         return;
     }
@@ -259,7 +259,7 @@ function loginUser() {
         company &&
         company.email === email &&
         company.password === password &&
-        company.id === companyID
+        company.companyID === companyID
     ) {
 
         console.log("Admin login successful");
