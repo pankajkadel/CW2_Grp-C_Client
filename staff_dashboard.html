@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shifty Staff Dashboard</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="staff_dashboard.css">
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- sidebar -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <i class="fa-regular fa-calendar-days brand-icon"></i>
+
+            <div>
+                <h2>Shifty</h2>
+                <p>Staff Dashboard</p>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="#" class="nav-item active">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#schedule" class="nav-item">
+                <i class="fa-regular fa-calendar-days"></i>
+                <span>My Shifts</span>
+            </a>
+
+            <a href="#" class="nav-item" id="calendarNav">
+                <i class="fa-regular fa-calendar"></i>
+                <span>Calendar</span>
+            </a>
+
+            <a href="#" class="nav-item" id="requestsNav">
+                <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                <span>Requests</span>
+            </a>
+
+            <a href="#notifications" class="nav-item">
+                <i class="fa-regular fa-bell"></i>
+                <span>Notifications</span>
+                <span class="notification-number">3</span>
+            </a>
+
+            <a href="#" class="nav-item" id="payslipNav">
+                <i class="fa-regular fa-file-lines"></i>
+                <span>Payslip</span>
+            </a>
+
+            <a href="#" class="nav-item" id="profileNav">
+                <i class="fa-regular fa-circle-user"></i>
+                <span>Profile</span>
+            </a>
+
+            <a href="#" class="nav-item" id="settingsNav">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-profile">
+
+            <div class="mini-profile">
+
+                <div class="avatar">JS</div>
+
+                <div>
+                    <h4>John Smith</h4>
+                    <p>Team Member</p>
+                </div>
+
+            </div>
+
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="top-header">
+
+            <div>
+                <h1>
+                    Good morning,
+                    <span id="userFirstName">John</span>! 👋
+                </h1>
+
+                <p>Here's what's happening today.</p>
+            </div>
+
+            <div class="header-right">
+
+                <div class="notification-icon">
+                    <i class="fa-regular fa-bell"></i>
+                    <span>3</span>
+                </div>
+
+                <div class="header-divider"></div>
+
+                <div class="header-user">
+
+                    <div class="avatar">JS</div>
+
+                    <div>
+                        <h4>John Smith</h4>
+                        <p>Team Member</p>
+                    </div>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="top-grid">
+
+            <div class="card next-shift-card">
+
+                <div class="card-title">
+
+                    <div class="icon-box purple">
+                        <i class="fa-regular fa-calendar-days"></i>
+                    </div>
+
+                    <span>Your next shift</span>
+
+                </div>
+
+                <h2>Today, 9:00 AM - 5:00 PM</h2>
+
+                <p>Front of House • Team Member</p>
+
+                <button class="primary-btn" id="viewShiftBtn">
+                    View shift details
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+            </div>
+
+
+            <div class="card earnings-card">
+
+                <div>
+
+                    <div class="card-title">
+
+                        <div class="icon-box green">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+
+                        <span>Weekly earnings</span>
+
+                    </div>
+
+                    <h2>£184.50</h2>
+
+                    <p>75% of £246.00 goal</p>
+
+                </div>
+
+                <div class="progress-circle">
+                    <span>75%</span>
+                </div>
+
+            </div>
+
+
+            <div class="card manager-card">
+
+                <div class="card-title">
+
+                    <div class="icon-box orange">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+
+                    <span>Manager Updates</span>
+
+                </div>
+
+                <div class="manager-message">
+                    <span class="orange-dot"></span>
+                    Team meeting on Friday at 4 PM
+                </div>
+
+                <button class="outline-btn" id="updatesBtn">
+                    View all updates
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section class="actions-grid">
+
+            <button class="action-card highlighted" id="timeOffBtn">
+
+                <div class="icon-box purple">
+                    <i class="fa-regular fa-calendar-plus"></i>
+                </div>
+
+                <div class="action-text">
+                    <h3>Request Time Off</h3>
+                    <p>Request days off</p>
+                </div>
+
+                <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+            </button>
+
+
+            <button class="action-card" id="swapShiftBtn">
+
+                <div class="icon-box green">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                </div>
+
+                <div class="action-text">
+                    <h3>Swap Shift</h3>
+                    <p>Find a shift to swap</p>
+                </div>
+
+                <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+            </button>
+
+
+            <button class="action-card" id="dropShiftBtn">
+
+                <div class="icon-box red">
+                    <i class="fa-regular fa-trash-can"></i>
+                </div>
+
+                <div class="action-text">
+                    <h3>Drop Shift</h3>
+                    <p>Give up a shift</p>
+                </div>
+
+                <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+            </button>
+
+
+            <button class="action-card" id="viewPayslipBtn">
+
+                <div class="icon-box blue">
+                    <i class="fa-regular fa-file-lines"></i>
+                </div>
+
+                <div class="action-text">
+                    <h3>View Payslip</h3>
+                    <p>See your payslips</p>
+                </div>
+
+                <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+            </button>
+
+        </section>
+
+
+        <section class="content-grid">
+
+            <!-- weekly schedule -->
+            <div class="card schedule-card" id="schedule">
+
+                <div class="section-title">
+
+                    <div class="icon-box purple">
+                        <i class="fa-regular fa-calendar-days"></i>
+                    </div>
+
+                    <h2>My Schedule</h2>
+
+                </div>
+
+
+                <div class="schedule-row">
+                    <div class="schedule-date">
+                        <strong>Mon</strong>
+                        <span>12 Aug</span>
+                    </div>
+
+                    <div class="shift-line purple-line"></div>
+
+                    <div class="schedule-info">
+                        <strong>9:00 AM - 5:00 PM</strong>
+                        <span>Front of House</span>
+                    </div>
+                </div>
+
+
+                <div class="schedule-row">
+                    <div class="schedule-date">
+                        <strong>Tue</strong>
+                        <span>13 Aug</span>
+                    </div>
+
+                    <div class="shift-line purple-line"></div>
+
+                    <div class="schedule-info">
+                        <strong>2:00 PM - 10:00 PM</strong>
+                        <span>Front of House</span>
+                    </div>
+                </div>
+
+
+                <div class="schedule-row">
+                    <div class="schedule-date">
+                        <strong>Wed</strong>
+                        <span>14 Aug</span>
+                    </div>
+
+                    <div class="shift-line green-line"></div>
+
+                    <div class="schedule-info">
+                        <strong>9:00 AM - 5:00 PM</strong>
+                        <span>Front of House</span>
+                    </div>
+                </div>
+
+
+                <div class="schedule-row">
+                    <div class="schedule-date">
+                        <strong>Thu</strong>
+                        <span>15 Aug</span>
+                    </div>
+
+                    <div class="day-off-dot"></div>
+
+                    <div class="schedule-info">
+                        <strong>Day Off</strong>
+                    </div>
+                </div>
+
+
+                <div class="schedule-row">
+                    <div class="schedule-date">
+                        <strong>Fri</strong>
+                        <span>16 Aug</span>
+                    </div>
+
+                    <div class="shift-line purple-line"></div>
+
+                    <div class="schedule-info">
+                        <strong>9:00 AM - 5:00 PM</strong>
+                        <span>Front of House</span>
+                    </div>
+                </div>
+
+
+                <div class="schedule-row">
+                    <div class="schedule-date">
+                        <strong>Sat</strong>
+                        <span>17 Aug</span>
+                    </div>
+
+                    <div class="shift-line purple-line"></div>
+
+                    <div class="schedule-info">
+                        <strong>11:00 AM - 7:00 PM</strong>
+                        <span>Front of House</span>
+                    </div>
+                </div>
+
+
+                <div class="schedule-row">
+                    <div class="schedule-date">
+                        <strong>Sun</strong>
+                        <span>18 Aug</span>
+                    </div>
+
+                    <div class="day-off-dot"></div>
+
+                    <div class="schedule-info">
+                        <strong>Day Off</strong>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="right-column">
+
+                <div class="card summary-card">
+
+                    <div class="section-title">
+
+                        <div class="icon-box purple">
+                            <i class="fa-solid fa-chart-simple"></i>
+                        </div>
+
+                        <h2>Shift Summary</h2>
+
+                    </div>
+
+
+                    <div class="summary-list">
+
+                        <div class="summary-row">
+
+                            <div class="summary-left">
+
+                                <div class="round-icon purple">
+                                    <i class="fa-regular fa-clock"></i>
+                                </div>
+
+                                <div>
+                                    <strong>Hours worked</strong>
+                                    <span>This week</span>
+                                </div>
+
+                            </div>
+
+                            <strong>24.5 hrs</strong>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <div class="summary-left">
+
+                                <div class="round-icon green">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+
+                                <div>
+                                    <strong>Shifts completed</strong>
+                                    <span>This week</span>
+                                </div>
+
+                            </div>
+
+                            <strong>3</strong>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <div class="summary-left">
+
+                                <div class="round-icon orange">
+                                    <i class="fa-regular fa-hourglass-half"></i>
+                                </div>
+
+                                <div>
+                                    <strong>Shifts remaining</strong>
+                                    <span>This week</span>
+                                </div>
+
+                            </div>
+
+                            <strong>2</strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card notifications-card" id="notifications">
+
+                    <div class="notifications-heading">
+
+                        <h2>Recent Notifications</h2>
+
+                        <button id="viewAllNotifications">
+                            View all
+                        </button>
+
+                    </div>
+
+
+                    <div class="notification-row">
+
+                        <div class="notification-content">
+                            <span class="notification-dot purple-dot"></span>
+                            <p>Your shift on 16 Aug has been updated</p>
+                        </div>
+
+                        <span class="notification-time">10 min ago</span>
+
+                    </div>
+
+
+                    <div class="notification-row">
+
+                        <div class="notification-content">
+                            <span class="notification-dot orange-dot"></span>
+                            <p>New manager announcement</p>
+                        </div>
+
+                        <span class="notification-time">1 hour ago</span>
+
+                    </div>
+
+
+                    <div class="notification-row">
+
+                        <div class="notification-content">
+                            <span class="notification-dot green-dot"></span>
+                            <p>Your time-off request was received</p>
+                        </div>
+
+                        <span class="notification-time">2 hours ago</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- time off form -->
+<div class="modal-overlay" id="timeOffModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2>Request Time Off</h2>
+
+            <button class="close-modal" id="closeTimeOffModal">
+                &times;
+            </button>
+
+        </div>
+
+
+        <form id="timeOffForm">
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="endDate">End Date</label>
+                    <input type="date" id="endDate" required>
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="timeOffReason">Reason</label>
+
+                <textarea
+                    id="timeOffReason"
+                    placeholder="Enter your reason"
+                    required></textarea>
+
+            </div>
+
+
+            <div class="modal-buttons">
+
+                <button type="button"
+                        class="cancel-btn"
+                        id="cancelTimeOff">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="submit-btn">
+                    Submit Request
+                </button>
+
+            </div>
+
+
+            <p class="success-message" id="successMessage">
+                <i class="fa-solid fa-check"></i>
+                Time-off request submitted successfully!
+            </p>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div class="modal-overlay" id="genericModal">
+
+    <div class="modal small-modal">
+
+        <div class="modal-header">
+
+            <h2 id="genericModalTitle">Details</h2>
+
+            <button class="close-modal" id="closeGenericModal">
+                &times;
+            </button>
+
+        </div>
+
+        <div id="genericModalContent"></div>
+
+    </div>
+
+</div>
+
+
+<script src="staff_dashboard.js"></script>
+
+</body>
+</html>
