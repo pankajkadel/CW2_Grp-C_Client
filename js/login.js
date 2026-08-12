@@ -252,8 +252,11 @@ function loginUser() {
 
     // Check admin login
     const company = JSON.parse(localStorage.getItem("company"));
-
-    console.log("Company data:", company);
+    // Get staff applications
+     const staffApplications = JSON.parse(localStorage.getItem("staffApplications")) || [];
+   
+     console.log("Company data:", company);
+     console.log("Staff applications:", staffApplications);
 
     if (
         company &&
@@ -283,10 +286,6 @@ function loginUser() {
         }
 
     // check staff account
-    const staffApplications =
-        JSON.parse(localStorage.getItem("staffApplications")) || [];
-
-    console.log("Staff applications:", staffApplications);
 
 
     const staff = staffApplications.find(user =>

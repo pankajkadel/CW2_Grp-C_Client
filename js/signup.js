@@ -124,26 +124,8 @@ function generateCompanyID() {
         .toUpperCase();
 
     return "SHFT-" + random;
+
 }
-
-    // Create company object
-    const company = {
-        companyName: companyname.value,
-        email: email.value,
-        password: signup_password.value,
-        companyID: companyID,
-        role:"admin",
-        employees: []
-    };
-
-
-    // Save company
-    localStorage.setItem(
-        "company",
-        JSON.stringify(company)
-    );
-
-
 
 // Alert for empty place
 function submitSignup() {
@@ -208,14 +190,25 @@ function submitSignup() {
     }
 
 
-    // Generate company ID
-    const companyID = generateCompanyID();
-
-
-
-
-    // Go to success page
-    window.location.href = "success.html";
+// Generate unique Company ID
+const companyID = generateCompanyID();
+ console.log("Generated Company ID:", companyID); 
+ // Create company object 
+ const company = { companyName: companyname.value.trim(),
+     email: email.value.trim(),
+      password: signup_password.value,
+       companyID: companyID,
+        role: "admin", employees: [] 
+    }; 
+    // Save company to localStorage
+  localStorage.setItem(
+     "company",
+      JSON.stringify(company) );
+       // Check that company was saved
+        console.log( "Saved company:",
+             JSON.parse(localStorage.getItem("company")) );
+         // Go to success page
+         window.location.href = "success.html";
 
 }
 
