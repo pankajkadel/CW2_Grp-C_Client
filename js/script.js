@@ -1,17 +1,14 @@
 
 
 // Nav background on scroll
-const nav = document.getElementById("nav");
-
-window.addEventListener("scroll", function () {
-
-    if (window.scrollY > 20) {
-        nav.classList.add("scrolled");
+$(window).on("scroll", function () {
+    if ($(window).scrollTop() > 20) {
+        $("#nav").addClass("scrolled");
     } else {
-        nav.classList.remove("scrolled");
+        $("#nav").removeClass("scrolled");
     }
-
 });
+
 // Mobile menu toggle
 const navBurger = document.getElementById('navBurger');
 const navMobile = document.getElementById('navMobile');
