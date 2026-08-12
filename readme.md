@@ -121,21 +121,29 @@ Employees can:
 CW2_Grp-C_Client/
 │
 ├── html/ # All website pages
-│ ├── home.html # Landing page
+│ ├── index.html # Landing page
 │ ├── signup.html # Company registration page
 │ ├── login.html # User login page
 │ ├── terms.html # Terms and Conditions
-│ └── success.html # Successful registration page
+│ ├── success.html # Successful registration page
+│ ├── admin_dashboard.html # Admin dashboard page
+│ └── staff_dashboard.html # Staff dashboard page
 │
 ├── css/ # Website styling files
-│ ├── home.css # Home page styling
+│ ├── style.css # Home page styling
 │ ├── signup.css # Signup page styling
-│ └── login.css # Login page styling
+│ ├── login.css # Login page styling
+│ ├── admin_dashboard.css # Admin dashboard page styling
+│ └── staff_dashboard.css # Staff dashboard page styling
+│
 │
 ├── js/ # JavaScript functionality
-│ ├── home.js # Navigation and home page scripts
+│ ├── script.js # Navigation and home page scripts
 │ ├── signup.js # Company and staff registration logic
-│ └── login.js # Authentication and role checking
+│ ├── login.js # Authentication and role checking
+│ ├── admin_dashboard.js # Admin_dashboard
+│ └── staff_dashboard.js # staff dashboard 
+
 │
 ├── images/ # Website images
 │ ├── image1.jpg # Login/Home background image
